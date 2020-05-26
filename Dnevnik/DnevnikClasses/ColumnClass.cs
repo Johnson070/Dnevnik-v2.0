@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace Dnevnik.DnevnikClasses
 {
-    class ColumnClass
+    internal class ColumnClass
     {
         public List<DataGridViewColumn> ball = new List<DataGridViewColumn>();
         public List<DataGridViewColumn> weight = new List<DataGridViewColumn>();
