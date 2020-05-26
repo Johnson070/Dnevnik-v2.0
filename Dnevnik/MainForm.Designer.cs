@@ -61,16 +61,17 @@
             this.loadBar = new System.Windows.Forms.ToolStripProgressBar();
             this.LabelLoad = new System.Windows.Forms.ToolStripStatusLabel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
             this.TabControlMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.AddTab = new System.Windows.Forms.ToolStripMenuItem();
-            this.WorkBack = new System.ComponentModel.BackgroundWorker();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.wefToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DeleteTab = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.EditTab = new System.Windows.Forms.ToolStripMenuItem();
+            this.WorkBack = new System.ComponentModel.BackgroundWorker();
+            this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.wefToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.информацияОбОбновленииToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Tools.SuspendLayout();
             this.Status.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -253,6 +254,7 @@
             this.mainList.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.settingsButtonTool,
             this.обновлениеПрограммыToolStripMenuItem,
+            this.информацияОбОбновленииToolStripMenuItem,
             this.toolStripSeparator7,
             this.оПрограммеToolStripMenuItem});
             this.mainList.Image = ((System.Drawing.Image)(resources.GetObject("mainList.Image")));
@@ -265,25 +267,25 @@
             // settingsButtonTool
             // 
             this.settingsButtonTool.Name = "settingsButtonTool";
-            this.settingsButtonTool.Size = new System.Drawing.Size(212, 22);
+            this.settingsButtonTool.Size = new System.Drawing.Size(236, 22);
             this.settingsButtonTool.Text = "Настройки";
             this.settingsButtonTool.Click += new System.EventHandler(this.SettingsButtonTool_Click);
             // 
             // обновлениеПрограммыToolStripMenuItem
             // 
             this.обновлениеПрограммыToolStripMenuItem.Name = "обновлениеПрограммыToolStripMenuItem";
-            this.обновлениеПрограммыToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.обновлениеПрограммыToolStripMenuItem.Size = new System.Drawing.Size(236, 22);
             this.обновлениеПрограммыToolStripMenuItem.Text = "Обновление программы";
             // 
             // toolStripSeparator7
             // 
             this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.Size = new System.Drawing.Size(209, 6);
+            this.toolStripSeparator7.Size = new System.Drawing.Size(233, 6);
             // 
             // оПрограммеToolStripMenuItem
             // 
             this.оПрограммеToolStripMenuItem.Name = "оПрограммеToolStripMenuItem";
-            this.оПрограммеToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.оПрограммеToolStripMenuItem.Size = new System.Drawing.Size(236, 22);
             this.оПрограммеToolStripMenuItem.Text = "О программе";
             // 
             // Status
@@ -319,23 +321,6 @@
             this.panel1.Size = new System.Drawing.Size(637, 455);
             this.panel1.TabIndex = 3;
             // 
-            // TabControlMenu
-            // 
-            this.TabControlMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.AddTab,
-            this.DeleteTab,
-            this.toolStripSeparator8,
-            this.EditTab});
-            this.TabControlMenu.Name = "contextMenuStrip1";
-            this.TabControlMenu.Size = new System.Drawing.Size(181, 98);
-            // 
-            // AddTab
-            // 
-            this.AddTab.Name = "AddTab";
-            this.AddTab.Size = new System.Drawing.Size(180, 22);
-            this.AddTab.Text = "Добавить вкладку";
-            this.AddTab.Click += new System.EventHandler(this.AddTab_Click);
-            // 
             // tabControl1
             // 
             this.tabControl1.ContextMenuStrip = this.TabControlMenu;
@@ -345,6 +330,42 @@
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(637, 455);
             this.tabControl1.TabIndex = 0;
+            // 
+            // TabControlMenu
+            // 
+            this.TabControlMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.AddTab,
+            this.DeleteTab,
+            this.toolStripSeparator8,
+            this.EditTab});
+            this.TabControlMenu.Name = "contextMenuStrip1";
+            this.TabControlMenu.Size = new System.Drawing.Size(175, 76);
+            // 
+            // AddTab
+            // 
+            this.AddTab.Name = "AddTab";
+            this.AddTab.Size = new System.Drawing.Size(174, 22);
+            this.AddTab.Text = "Добавить вкладку";
+            this.AddTab.Click += new System.EventHandler(this.AddTab_Click);
+            // 
+            // DeleteTab
+            // 
+            this.DeleteTab.Name = "DeleteTab";
+            this.DeleteTab.Size = new System.Drawing.Size(174, 22);
+            this.DeleteTab.Text = "Удалить вкладку";
+            this.DeleteTab.Click += new System.EventHandler(this.DeleteTab_Click);
+            // 
+            // toolStripSeparator8
+            // 
+            this.toolStripSeparator8.Name = "toolStripSeparator8";
+            this.toolStripSeparator8.Size = new System.Drawing.Size(171, 6);
+            // 
+            // EditTab
+            // 
+            this.EditTab.Name = "EditTab";
+            this.EditTab.Size = new System.Drawing.Size(174, 22);
+            this.EditTab.Text = "Изменить вкладку";
+            this.EditTab.Click += new System.EventHandler(this.EditTab_Click);
             // 
             // contextMenuStrip2
             // 
@@ -366,24 +387,11 @@
             this.wefToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.wefToolStripMenuItem.Text = "wef";
             // 
-            // DeleteTab
+            // информацияОбОбновленииToolStripMenuItem
             // 
-            this.DeleteTab.Name = "DeleteTab";
-            this.DeleteTab.Size = new System.Drawing.Size(180, 22);
-            this.DeleteTab.Text = "Удалить вкладку";
-            this.DeleteTab.Click += new System.EventHandler(this.DeleteTab_Click);
-            // 
-            // toolStripSeparator8
-            // 
-            this.toolStripSeparator8.Name = "toolStripSeparator8";
-            this.toolStripSeparator8.Size = new System.Drawing.Size(177, 6);
-            // 
-            // EditTab
-            // 
-            this.EditTab.Name = "EditTab";
-            this.EditTab.Size = new System.Drawing.Size(180, 22);
-            this.EditTab.Text = "Изменить вкладку";
-            this.EditTab.Click += new System.EventHandler(this.EditTab_Click);
+            this.информацияОбОбновленииToolStripMenuItem.Name = "информацияОбОбновленииToolStripMenuItem";
+            this.информацияОбОбновленииToolStripMenuItem.Size = new System.Drawing.Size(236, 22);
+            this.информацияОбОбновленииToolStripMenuItem.Text = "Информация об обновлении";
             // 
             // dnevnik
             // 
@@ -452,6 +460,7 @@
         private System.Windows.Forms.ToolStripMenuItem DeleteTab;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
         private System.Windows.Forms.ToolStripMenuItem EditTab;
+        private System.Windows.Forms.ToolStripMenuItem информацияОбОбновленииToolStripMenuItem;
     }
 }
 
