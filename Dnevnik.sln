@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29403.142
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dnevnik", "Dnevnik\Dnevnik.csproj", "{2E21C892-3A9F-449E-8AE2-584C760CDC71}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiDiaryLibrary", "..\WebBrowserParser\ApiDiaryLibrary\ApiDiaryLibrary.csproj", "{6708A168-78D8-4F9C-B0D2-FBB39E151F47}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2E21C892-3A9F-449E-8AE2-584C760CDC71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E21C892-3A9F-449E-8AE2-584C760CDC71}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E21C892-3A9F-449E-8AE2-584C760CDC71}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E21C892-3A9F-449E-8AE2-584C760CDC71}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6708A168-78D8-4F9C-B0D2-FBB39E151F47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6708A168-78D8-4F9C-B0D2-FBB39E151F47}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6708A168-78D8-4F9C-B0D2-FBB39E151F47}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6708A168-78D8-4F9C-B0D2-FBB39E151F47}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {78525B2F-FE88-41B3-A365-D9113D9B84AA}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,57 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Dnevnik.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="nameLess1" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="nameLess2" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="nameLess3" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="nameLess4" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="nameLess5" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="nameLess6" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Ответ на уроке</Value>
+    </Setting>
+    <Setting Name="nameLess7" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Работа с контурными картами,Самостоятельная работа,Контрольное списывание,Проверочная работа</Value>
+    </Setting>
+    <Setting Name="nameLess8" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Аудирование,Сочинение,Изложение</Value>
+    </Setting>
+    <Setting Name="nameLess9" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Практическая работа,Лабораторная работа,Творческая работа</Value>
+    </Setting>
+    <Setting Name="nameLess10" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Контрольная,АКР,ИКР,КПИ,Контрольный диктант,Тест,Входная контрольная работа,Работа над ошибками</Value>
+    </Setting>
+    <Setting Name="welcome" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="change_log" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="averBall1" Type="System.Single" Scope="User">
+      <Value Profile="(Default)">2.5</Value>
+    </Setting>
+    <Setting Name="averBall2" Type="System.Single" Scope="User">
+      <Value Profile="(Default)">3.5</Value>
+    </Setting>
+    <Setting Name="averBall3" Type="System.Single" Scope="User">
+      <Value Profile="(Default)">4.5</Value>
+    </Setting>
+    <Setting Name="typeBall" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="keyAccess" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+  </Settings>
+</SettingsFile>
