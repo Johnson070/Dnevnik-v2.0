@@ -15,24 +15,6 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_07A2EB6989D7399968C99C726F3A62AE"
-        "OwnerKey" = "8:_65ACFB40079D4460BC3F4324654F82FA"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_07A2EB6989D7399968C99C726F3A62AE"
-        "OwnerKey" = "8:_391228140F094D449921F344644FFC75"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_07A2EB6989D7399968C99C726F3A62AE"
-        "OwnerKey" = "8:_4986C710B1FD8BC523EA7009B1D46C48"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_1F3941287EDAEB39AAFD29E23D67337B"
         "OwnerKey" = "8:_65ACFB40079D4460BC3F4324654F82FA"
         "MsmSig" = "8:_UNDEFINED"
@@ -63,26 +45,56 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_B65F3E736BA0F6488AA970233952F445"
-        "OwnerKey" = "8:_4986C710B1FD8BC523EA7009B1D46C48"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_B65F3E736BA0F6488AA970233952F445"
+        "MsmKey" = "8:_76ED8D4BD73B2E495F4120376CC49C35"
         "OwnerKey" = "8:_391228140F094D449921F344644FFC75"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_B65F3E736BA0F6488AA970233952F445"
+        "MsmKey" = "8:_76ED8D4BD73B2E495F4120376CC49C35"
         "OwnerKey" = "8:_65ACFB40079D4460BC3F4324654F82FA"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_76ED8D4BD73B2E495F4120376CC49C35"
+        "OwnerKey" = "8:_4986C710B1FD8BC523EA7009B1D46C48"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_D6B7855D97044B0DA51C73B0A40172DE"
         "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_E3C457E1C918BE8EBBD5F9DFD4878AF6"
+        "OwnerKey" = "8:_391228140F094D449921F344644FFC75"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_E3C457E1C918BE8EBBD5F9DFD4878AF6"
+        "OwnerKey" = "8:_4986C710B1FD8BC523EA7009B1D46C48"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_E3C457E1C918BE8EBBD5F9DFD4878AF6"
+        "OwnerKey" = "8:_65ACFB40079D4460BC3F4324654F82FA"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_65ACFB40079D4460BC3F4324654F82FA"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_4986C710B1FD8BC523EA7009B1D46C48"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -100,31 +112,19 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_76ED8D4BD73B2E495F4120376CC49C35"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_E3C457E1C918BE8EBBD5F9DFD4878AF6"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_28FF1278F42EA7C914A53BCDC54AE2D8"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_65ACFB40079D4460BC3F4324654F82FA"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_4986C710B1FD8BC523EA7009B1D46C48"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_B65F3E736BA0F6488AA970233952F445"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_07A2EB6989D7399968C99C726F3A62AE"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -145,6 +145,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
         "Release"
         {
@@ -161,6 +169,22 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    }
+                }
+            }
         }
     }
     "Deployable"
@@ -190,37 +214,6 @@
         }
         "File"
         {
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_07A2EB6989D7399968C99C726F3A62AE"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_07A2EB6989D7399968C99C726F3A62AE"
-                    {
-                    "Name" = "8:Newtonsoft.Json.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:Newtonsoft.Json.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_0AF3AF99DB874DB1BD1B12FE5817A334"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_1F3941287EDAEB39AAFD29E23D67337B"
             {
             "AssemblyRegister" = "3:1"
@@ -314,14 +307,14 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_B65F3E736BA0F6488AA970233952F445"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_76ED8D4BD73B2E495F4120376CC49C35"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
             "AssemblyAsmDisplayName" = "8:RestSharp, Version=106.11.3.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_B65F3E736BA0F6488AA970233952F445"
+                    "_76ED8D4BD73B2E495F4120376CC49C35"
                     {
                     "Name" = "8:RestSharp.dll"
                     "Attributes" = "3:512"
@@ -365,13 +358,44 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_E3C457E1C918BE8EBBD5F9DFD4878AF6"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_E3C457E1C918BE8EBBD5F9DFD4878AF6"
+                    {
+                    "Name" = "8:Newtonsoft.Json.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:Newtonsoft.Json.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_0AF3AF99DB874DB1BD1B12FE5817A334"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
         }
         "FileType"
         {
             "{5EB83D71-FA18-4901-BE56-DE22E13CC478}:_6D3CC0D9C8D840DDAC39A53789C4955B"
             {
             "Name" = "8:Открыть в Дневнике"
-            "Description" = "8:"
+            "Description" = "8:Открыть файл в Дневнике"
             "Extensions" = "8:.dnv"
             "MIME" = "8:"
             "Icon" = "8:"
@@ -385,7 +409,7 @@
                     "{95C0C507-CBF0-42B8-B119-07219E384A4A}:_A0F006CAC91045059DB081289BB0B2C0"
                     {
                     "Command" = "8:&Open"
-                    "Verb" = "8:Открыть"
+                    "Verb" = "8:"
                     "Arguments" = "8:\"%1\""
                     "Order" = "3:0"
                     }
@@ -456,7 +480,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Дневник"
         "ProductCode" = "8:{DC9B7FC0-5EA7-492C-A088-857153378DDF}"
-        "PackageCode" = "8:{B91B64B0-2CFF-476D-BC3B-97EB521694F4}"
+        "PackageCode" = "8:{FF0484D5-E443-44A9-A8E5-DEF5B41A9A43}"
         "UpgradeCode" = "8:{D4D764BB-B390-4608-B26D-D6C6939AA3EF}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
@@ -467,13 +491,13 @@
         "Manufacturer" = "8:iWeber"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
-        "Title" = "8:DnevnikSetup"
+        "Title" = "8:Дневник"
         "Subject" = "8:"
         "ARPCONTACT" = "8:Vladimir Veber"
         "Keywords" = "8:"
         "ARPCOMMENTS" = "8:"
         "ARPURLINFOABOUT" = "8:vk.com/vveber070"
-        "ARPPRODUCTICON" = "8:"
+        "ARPPRODUCTICON" = "8:_D6B7855D97044B0DA51C73B0A40172DE"
         "ARPIconIndex" = "3:0"
         "SearchPath" = "8:"
         "UseSystemSearchPath" = "11:TRUE"

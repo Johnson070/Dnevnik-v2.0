@@ -320,14 +320,15 @@
             this.ballDo.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.ballDo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
-            // sortData
+            // SortData
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(849, 587);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.sortTool);
-            this.Name = "sortData";
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Name = "SortData";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "sortData";
             this.Shown += new System.EventHandler(this.sortData_Shown);

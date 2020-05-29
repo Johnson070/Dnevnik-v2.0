@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SortDataSr));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.genButton = new System.Windows.Forms.Button();
             this.numericUpDown4 = new System.Windows.Forms.NumericUpDown();
@@ -258,14 +259,15 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Количество оценок";
             // 
-            // sortDataSr
+            // SortDataSr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(257, 162);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Name = "sortDataSr";
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Name = "SortDataSr";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "sortDataSr";
             this.groupBox1.ResumeLayout(false);

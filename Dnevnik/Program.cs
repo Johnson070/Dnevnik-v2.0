@@ -16,7 +16,8 @@ namespace Dnevnik
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new dnevnik());
+            string[] args = Environment.GetCommandLineArgs();
+            Application.Run(new dnevnik(args));
         }
     }
 }

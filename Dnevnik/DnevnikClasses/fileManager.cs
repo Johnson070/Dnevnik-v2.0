@@ -16,6 +16,92 @@ namespace Dnevnik.DnevnikClasses
 
         //private string directory = "";
 
+        public bool GetFileType(string path)
+        {
+            string json;
+            StructFile table = null;
+
+            json = File.ReadAllText(path);
+
+            try
+            {
+                table = JsonConvert.DeserializeObject<StructFile>(json);
+                return table.typeGrid;
+            }
+            catch
+            {
+                throw new Exception("Не целостный файл!");
+            }
+        }
+
+        public void OpenFile(DataGridView grid, string path, bool type)
+        {
+            string json;
+            StructFile table = null;
+
+            json = File.ReadAllText(path);
+
+            try
+            {
+                table = JsonConvert.DeserializeObject<StructFile>(json);
+            }
+            catch
+            {
+                MessageBox.Show("Таблица не была загружена.\nПроверьте целостность файла.", "Ошибка чтения файла", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            if (table != null)
+            {
+                if (table.typeGrid != type)
+                {
+                    MessageBox.Show("Не совпадают настройки типа вычисления баллов!\rПоменяйте в вкладке тип на средний балл/средний взвешенный бал.", "Ошибка несовместимости", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+                else
+                {
+                    MarksTable drawTable;
+
+                    if (!type)
+                    {
+                        drawTable = new MarksTableAverageMass
+                        {
+                            marks = grid
+                        };
+
+                        drawTable.marks.Rows.Clear();
+                        drawTable.marks.Columns.Clear();
+
+                        drawTable.DrawGrid((table.columnCount - 2) / 2, table.nameLess);
+                    }
+                    else
+                    {
+                        drawTable = new MarksTableAverage
+                        {
+                            marks = grid
+                        };
+
+                        drawTable.marks.Rows.Clear();
+                        drawTable.marks.Columns.Clear();
+
+                        drawTable.DrawGrid(table.columnCount - 2, table.nameLess);
+                    }
+
+                    int posRow = 0, posColumn = 1;
+
+                    for (int i = 0; i < table.marks.Count; i++)
+                    {
+                        for (int j = 0; j < table.marks[i].Count; j++)
+                        {
+                            drawTable.marks[posColumn, posRow].Value = table.marks[i][j];
+                            posColumn++;
+                        }
+
+                        posRow++;
+                        posColumn = 1;
+                    }
+                }
+            }
+        }
+
         public void OpenFile(DataGridView grid, bool startEdit, bool fileOpen, bool type)
         {
             if (startEdit)
@@ -28,7 +114,7 @@ namespace Dnevnik.DnevnikClasses
 
             using OpenFileDialog loadFileDialog = new OpenFileDialog
             {
-                Filter = "json Файл (*.dnv)|*.dnv|txt Файл (*.txt)|*.txt",
+                Filter = "dnv Файл (*.dnv)|*.dnv|txt Файл (*.txt)|*.txt",
                 RestoreDirectory = true
             };
 
@@ -134,7 +220,7 @@ namespace Dnevnik.DnevnikClasses
 
             using SaveFileDialog saveLevelDialog = new SaveFileDialog
             {
-                Filter = "json Файл (*.dnv)|*.dnv|txt Файл (*.txt)|*.txt",
+                Filter = "dnv Файл (*.dnv)|*.dnv|txt Файл (*.txt)|*.txt",
                 RestoreDirectory = true,
                 FileName = fileName
             };

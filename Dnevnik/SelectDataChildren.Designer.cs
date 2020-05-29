@@ -28,7 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SelectDataChildren));
             this.ChilldrenSelect = new System.Windows.Forms.GroupBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.schoolmates = new System.Windows.Forms.ComboBox();
             this.Childrens = new System.Windows.Forms.ComboBox();
             this.StartDate = new System.Windows.Forms.DateTimePicker();
             this.EndDate = new System.Windows.Forms.DateTimePicker();
@@ -37,9 +41,6 @@
             this.SelectPeriod = new System.Windows.Forms.ComboBox();
             this.TypeYearList = new System.Windows.Forms.ComboBox();
             this.CloseButton = new System.Windows.Forms.Button();
-            this.schoolmates = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.ChilldrenSelect.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -58,6 +59,36 @@
             this.ChilldrenSelect.TabIndex = 0;
             this.ChilldrenSelect.TabStop = false;
             this.ChilldrenSelect.Text = "Учащийся(еся)";
+            // 
+            // label2
+            // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(6, 15);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(133, 13);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Учебная группа ученика:";
+            // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 55);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(62, 13);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Учащийся:";
+            // 
+            // schoolmates
+            // 
+            this.schoolmates.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.schoolmates.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.schoolmates.FormattingEnabled = true;
+            this.schoolmates.Location = new System.Drawing.Point(6, 71);
+            this.schoolmates.Name = "schoolmates";
+            this.schoolmates.Size = new System.Drawing.Size(190, 21);
+            this.schoolmates.TabIndex = 1;
             // 
             // Childrens
             // 
@@ -155,36 +186,6 @@
             this.CloseButton.UseVisualStyleBackColor = true;
             this.CloseButton.Click += new System.EventHandler(this.CloseButton_Click);
             // 
-            // schoolmates
-            // 
-            this.schoolmates.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.schoolmates.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.schoolmates.FormattingEnabled = true;
-            this.schoolmates.Location = new System.Drawing.Point(6, 71);
-            this.schoolmates.Name = "schoolmates";
-            this.schoolmates.Size = new System.Drawing.Size(190, 21);
-            this.schoolmates.TabIndex = 1;
-            // 
-            // label1
-            // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 55);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(62, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Учащийся:";
-            // 
-            // label2
-            // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 15);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(133, 13);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Учебная группа ученика:";
-            // 
             // SelectDataChildren
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -194,6 +195,7 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.ChilldrenSelect);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SelectDataChildren";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Выбор критериев";

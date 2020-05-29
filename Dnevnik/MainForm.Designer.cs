@@ -54,7 +54,7 @@
             this.clearTable = new System.Windows.Forms.ToolStripMenuItem();
             this.mainList = new System.Windows.Forms.ToolStripDropDownButton();
             this.settingsButtonTool = new System.Windows.Forms.ToolStripMenuItem();
-            this.обновлениеПрограммыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ProgramUpdate = new System.Windows.Forms.ToolStripMenuItem();
             this.UpdateInfo = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.SendMail = new System.Windows.Forms.ToolStripMenuItem();
@@ -63,7 +63,7 @@
             this.loadBar = new System.Windows.Forms.ToolStripProgressBar();
             this.LabelLoad = new System.Windows.Forms.ToolStripStatusLabel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.TabMarks = new System.Windows.Forms.TabControl();
             this.TabControlMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.AddTab = new System.Windows.Forms.ToolStripMenuItem();
             this.DeleteTab = new System.Windows.Forms.ToolStripMenuItem();
@@ -254,7 +254,7 @@
             this.mainList.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.mainList.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.settingsButtonTool,
-            this.обновлениеПрограммыToolStripMenuItem,
+            this.ProgramUpdate,
             this.UpdateInfo,
             this.toolStripSeparator7,
             this.SendMail,
@@ -273,11 +273,12 @@
             this.settingsButtonTool.Text = "Настройки";
             this.settingsButtonTool.Click += new System.EventHandler(this.SettingsButtonTool_Click);
             // 
-            // обновлениеПрограммыToolStripMenuItem
+            // ProgramUpdate
             // 
-            this.обновлениеПрограммыToolStripMenuItem.Name = "обновлениеПрограммыToolStripMenuItem";
-            this.обновлениеПрограммыToolStripMenuItem.Size = new System.Drawing.Size(271, 22);
-            this.обновлениеПрограммыToolStripMenuItem.Text = "Обновление программы";
+            this.ProgramUpdate.Name = "ProgramUpdate";
+            this.ProgramUpdate.Size = new System.Drawing.Size(271, 22);
+            this.ProgramUpdate.Text = "Обновление программы";
+            this.ProgramUpdate.Click += new System.EventHandler(this.ProgramUpdate_Click);
             // 
             // UpdateInfo
             // 
@@ -331,22 +332,22 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.tabControl1);
+            this.panel1.Controls.Add(this.TabMarks);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 25);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(637, 455);
             this.panel1.TabIndex = 3;
             // 
-            // tabControl1
+            // TabMarks
             // 
-            this.tabControl1.ContextMenuStrip = this.TabControlMenu;
-            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.Location = new System.Drawing.Point(0, 0);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(637, 455);
-            this.tabControl1.TabIndex = 0;
+            this.TabMarks.ContextMenuStrip = this.TabControlMenu;
+            this.TabMarks.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.TabMarks.Location = new System.Drawing.Point(0, 0);
+            this.TabMarks.Name = "TabMarks";
+            this.TabMarks.SelectedIndex = 0;
+            this.TabMarks.Size = new System.Drawing.Size(637, 455);
+            this.TabMarks.TabIndex = 0;
             // 
             // TabControlMenu
             // 
@@ -457,7 +458,7 @@
         private System.Windows.Forms.ToolStripMenuItem openFile;
         private System.Windows.Forms.ToolStripMenuItem saveFile;
         private System.Windows.Forms.ToolStripMenuItem settingsButtonTool;
-        private System.Windows.Forms.ToolStripMenuItem обновлениеПрограммыToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ProgramUpdate;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         private System.Windows.Forms.ToolStripMenuItem AboutProgram;
         private System.Windows.Forms.ToolStripProgressBar loadBar;
@@ -465,7 +466,7 @@
         private System.ComponentModel.BackgroundWorker WorkBack;
         private System.Windows.Forms.ContextMenuStrip TabControlMenu;
         private System.Windows.Forms.ToolStripMenuItem AddTab;
-        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabControl TabMarks;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem wefToolStripMenuItem;
