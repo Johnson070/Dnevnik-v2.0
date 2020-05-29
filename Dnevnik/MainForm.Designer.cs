@@ -55,7 +55,9 @@
             this.mainList = new System.Windows.Forms.ToolStripDropDownButton();
             this.settingsButtonTool = new System.Windows.Forms.ToolStripMenuItem();
             this.обновлениеПрограммыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.UpdateInfo = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
+            this.SendMail = new System.Windows.Forms.ToolStripMenuItem();
             this.оПрограммеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Status = new System.Windows.Forms.StatusStrip();
             this.loadBar = new System.Windows.Forms.ToolStripProgressBar();
@@ -71,7 +73,6 @@
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.wefToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.информацияОбОбновленииToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Tools.SuspendLayout();
             this.Status.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -254,8 +255,9 @@
             this.mainList.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.settingsButtonTool,
             this.обновлениеПрограммыToolStripMenuItem,
-            this.информацияОбОбновленииToolStripMenuItem,
+            this.UpdateInfo,
             this.toolStripSeparator7,
+            this.SendMail,
             this.оПрограммеToolStripMenuItem});
             this.mainList.Image = ((System.Drawing.Image)(resources.GetObject("mainList.Image")));
             this.mainList.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -267,25 +269,39 @@
             // settingsButtonTool
             // 
             this.settingsButtonTool.Name = "settingsButtonTool";
-            this.settingsButtonTool.Size = new System.Drawing.Size(236, 22);
+            this.settingsButtonTool.Size = new System.Drawing.Size(271, 22);
             this.settingsButtonTool.Text = "Настройки";
             this.settingsButtonTool.Click += new System.EventHandler(this.SettingsButtonTool_Click);
             // 
             // обновлениеПрограммыToolStripMenuItem
             // 
             this.обновлениеПрограммыToolStripMenuItem.Name = "обновлениеПрограммыToolStripMenuItem";
-            this.обновлениеПрограммыToolStripMenuItem.Size = new System.Drawing.Size(236, 22);
+            this.обновлениеПрограммыToolStripMenuItem.Size = new System.Drawing.Size(271, 22);
             this.обновлениеПрограммыToolStripMenuItem.Text = "Обновление программы";
+            // 
+            // UpdateInfo
+            // 
+            this.UpdateInfo.Name = "UpdateInfo";
+            this.UpdateInfo.Size = new System.Drawing.Size(271, 22);
+            this.UpdateInfo.Text = "Информация об обновлении";
+            this.UpdateInfo.Click += new System.EventHandler(this.UpdateInfo_Click);
             // 
             // toolStripSeparator7
             // 
             this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.Size = new System.Drawing.Size(233, 6);
+            this.toolStripSeparator7.Size = new System.Drawing.Size(268, 6);
+            // 
+            // SendMail
+            // 
+            this.SendMail.Name = "SendMail";
+            this.SendMail.Size = new System.Drawing.Size(271, 22);
+            this.SendMail.Text = "Репорт об ошибках и предложений";
+            this.SendMail.Click += new System.EventHandler(this.SendMail_Click);
             // 
             // оПрограммеToolStripMenuItem
             // 
             this.оПрограммеToolStripMenuItem.Name = "оПрограммеToolStripMenuItem";
-            this.оПрограммеToolStripMenuItem.Size = new System.Drawing.Size(236, 22);
+            this.оПрограммеToolStripMenuItem.Size = new System.Drawing.Size(271, 22);
             this.оПрограммеToolStripMenuItem.Text = "О программе";
             // 
             // Status
@@ -387,12 +403,6 @@
             this.wefToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.wefToolStripMenuItem.Text = "wef";
             // 
-            // информацияОбОбновленииToolStripMenuItem
-            // 
-            this.информацияОбОбновленииToolStripMenuItem.Name = "информацияОбОбновленииToolStripMenuItem";
-            this.информацияОбОбновленииToolStripMenuItem.Size = new System.Drawing.Size(236, 22);
-            this.информацияОбОбновленииToolStripMenuItem.Text = "Информация об обновлении";
-            // 
             // dnevnik
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -401,8 +411,9 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.Tools);
             this.Controls.Add(this.Status);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "dnevnik";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Дневник";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Dnevnik_FormClosing);
             this.Shown += new System.EventHandler(this.Dnevnik_Shown);
@@ -460,7 +471,8 @@
         private System.Windows.Forms.ToolStripMenuItem DeleteTab;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
         private System.Windows.Forms.ToolStripMenuItem EditTab;
-        private System.Windows.Forms.ToolStripMenuItem информацияОбОбновленииToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem UpdateInfo;
+        private System.Windows.Forms.ToolStripMenuItem SendMail;
     }
 }
 

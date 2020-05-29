@@ -36,66 +36,126 @@ namespace Dnevnik.DnevnikClasses
             public string nameWork;
         }
 
-        public List<List<Persons>> GetMembers(List<Groups> groups, bool getClassmates = true)
+        public List<List<Persons>> GetMembers()
         {
-            List<List<Persons>> ids = new List<List<Persons>>();
+            List<List<Persons>> ids = new List<List<Persons>>() { new List<Persons>() };
+            List<string> roles = new List<string>();
 
-            for (int i = 0; i < groups.Count; i++)
+            var info = ((JObject)JsonConvert.DeserializeObject(api.GetContext()))["roles"].ToObject<JArray>();
+
+            //var classmates = ((JArray)JsonConvert.DeserializeObject(api.GetGroupPersons(group.id, (groups[i].year >= DateTime.UtcNow.Year - 1 && groups[i].year <= DateTime.UtcNow.Year) ? false : true)));
+
+            foreach (string roleArray in info)
             {
-                List<string> roles = new List<string>();
-                ids.Add(new List<Persons>());
+                roles.Add(roleArray);
+            }
 
-                var group = groups[i];
-                var info = ((JObject)JsonConvert.DeserializeObject(api.GetContext()))["roles"].ToObject<JArray>();
-                var classmates = ((JArray)JsonConvert.DeserializeObject(api.GetGroupPersons(group.id)));
+            bool isStudent = false;
 
-                foreach (string roleArray in info)
+            foreach (string role in roles)
+            {
+                if (role == "EduStudent")
                 {
-                    roles.Add(roleArray);
-                }
-
-                bool isStudent = false;
-
-                foreach (string role in roles)
-                {
-                    if (role == "EduStudent")
-                    {
-                        isStudent = true;
-                    }
-                    else
-                    {
-                        isStudent = false;
-                        break;
-                    }
-                }
-
-                if (isStudent)
-                {
-                    var context = api.GetContext();
-
-                    ids[i].Add(new Persons() { userId = ((JObject)JsonConvert.DeserializeObject(context))["userId"].Value<long>(), personId = ((JObject)JsonConvert.DeserializeObject(api.GetContext()))["personId"].Value<long>(), userName = ((JObject)JsonConvert.DeserializeObject(api.GetContext()))["shortName"].Value<string>() });
-                    //ids.Add(((JObject)JsonConvert.DeserializeObject(api.GetContext()))["userId"].Value<long>());
-                    //ids.Add(((JObject)JsonConvert.DeserializeObject(api.GetContext()))["personId"].Value<long>());
+                    isStudent = true;
                 }
                 else
                 {
-                    var childrens = ((JArray)JsonConvert.DeserializeObject(api.GetChildren())).ToObject<JArray>();
-                    var context = ((JObject)JsonConvert.DeserializeObject(api.GetContext()))["children"].ToObject<JArray>();
-
-                    int j = 0;
-
-                    foreach (JObject children in context)
-                    {
-                        ids[i].Add(new Persons() { personId = children["personId"].Value<long>(), userName = children["shortName"].Value<string>(), userId = childrens[j].Value<long>() });
-                        j++;
-                    }
+                    isStudent = false;
+                    break;
                 }
+            }
 
-                if (getClassmates)
-                    foreach (JObject person in classmates)
+            if (isStudent)
+            {
+                var context = api.GetContext();
+
+                ids[0].Add(new Persons() { userId = ((JObject)JsonConvert.DeserializeObject(context))["userId"].Value<long>(), personId = ((JObject)JsonConvert.DeserializeObject(api.GetContext()))["personId"].Value<long>(), userName = ((JObject)JsonConvert.DeserializeObject(api.GetContext()))["shortName"].Value<string>() });
+            }
+            else
+            {
+                var childrens = ((JArray)JsonConvert.DeserializeObject(api.GetChildren())).ToObject<JArray>();
+                var context = ((JObject)JsonConvert.DeserializeObject(api.GetContext()))["children"].ToObject<JArray>();
+
+                int j = 0;
+
+                foreach (JObject children in context)
+                {
+                    ids[0].Add(new Persons() { personId = children["personId"].Value<long>(), userName = children["shortName"].Value<string>(), userId = childrens[j].Value<long>() });
+                    j++;
+                }
+            }
+
+            return ids;
+        }
+
+        public List<List<Persons>> GetMembers(List<List<Groups>> groups, bool getClassmates = true)
+        {
+            List<List<Persons>> ids = new List<List<Persons>>();
+
+
+            for (int i = 0; i < groups.Count; i++)
+            {
+                for (int j = 0; j < groups[i].Count; j++)
+                {
+                    ids.Add(new List<Persons>());
+
+                    List<string> roles = new List<string>();
+
+                    var group = groups[i][j];
+                    var info = ((JObject)JsonConvert.DeserializeObject(api.GetContext()))["roles"].ToObject<JArray>();
+
+                    var classmates = ((JArray)JsonConvert.DeserializeObject(api.GetGroupPersons(group.id, (group.year >= DateTime.UtcNow.Year - 1 && group.year <= DateTime.UtcNow.Year) ? false : true)));
+
+                    foreach (string roleArray in info)
                     {
-                        ids[i].Add(new Persons() { personId = person["id"].Value<long>(), userName = person["shortName"].Value<string>(), userId = person["userId"].Value<long>() });
+                        roles.Add(roleArray);
                     }
+
+                    bool isStudent = false;
+
+                    foreach (string role in roles)
+                    {
+                        if (role == "EduStudent")
+                        {
+                            isStudent = true;
+                        }
+                        else
+                        {
+                            isStudent = false;
+                            break;
+                        }
+                    }
+
+                    if (isStudent && !getClassmates)
+                    {
+                        var context = api.GetContext();
+
+                        ids[j].Add(new Persons() { userId = ((JObject)JsonConvert.DeserializeObject(context))["userId"].Value<long>(), personId = ((JObject)JsonConvert.DeserializeObject(api.GetContext()))["personId"].Value<long>(), userName = ((JObject)JsonConvert.DeserializeObject(api.GetContext()))["shortName"].Value<string>() });
+                    }
+                    else if (!getClassmates)
+                    {
+                        var childrens = ((JArray)JsonConvert.DeserializeObject(api.GetChildren())).ToObject<JArray>();
+                        var context = ((JObject)JsonConvert.DeserializeObject(api.GetContext()))["children"].ToObject<JArray>();
+
+                        int k = 0;
+
+                        foreach (JObject children in context)
+                        {
+                            ids[j].Add(new Persons() { personId = children["personId"].Value<long>(), userName = children["shortName"].Value<string>(), userId = childrens[k].Value<long>() });
+                            k++;
+                        }
+                    }
+
+                    if (getClassmates) //  && (groups[i].year == DateTime.UtcNow.Year-1 || groups[i].year == DateTime.UtcNow.Year)
+                        foreach (JObject person in classmates)
+                        {
+                            try
+                            {
+                                ids[j].Add(new Persons() { personId = person["id"].Value<long>(), userName = person["shortName"].Value<string>(), userId = person["userId"].Value<long>() });
+                            }
+                            catch { }
+                        }
+                }
             }
 
             return ids;
@@ -122,16 +182,22 @@ namespace Dnevnik.DnevnikClasses
             public JArray typeWork;
         }
 
-        public List<Groups> GetAllGroups(long personId)
+        public List<List<Groups>> GetAllGroups(List<List<Persons>> persons)
         {
-            var groupsJ = ((JArray)JsonConvert.DeserializeObject(api.GetPersonGroupsAll(personId)));
+            List<List<Groups>> groups = new List<List<Groups>>();
 
-            List<Groups> groups = new List<Groups>();
-
-            foreach (JObject group in groupsJ)
-                if (group["type"].Value<string>() == "Group")
+            for (int i = 0; i < persons.Count; i++)
+                for (int j = 0; j < persons[i].Count; j++)
                 {
-                    groups.Add(new Groups() { id = group["id"].Value<long>(), name = group["name"].Value<string>(), year = group["studyyear"].Value<int>() });
+                    groups.Add(new List<Groups>());
+
+                    var groupsJ = ((JArray)JsonConvert.DeserializeObject(api.GetPersonGroupsAll(persons[i][j].personId)));
+
+                    foreach (JObject group in groupsJ)
+                        if (group["type"].Value<string>() == "Group")
+                        {
+                            groups[i].Add(new Groups() { id = group["id_str"].Value<long>(), name = group["name"].Value<string>(), year = group["studyyear"].Value<int>() });
+                        }
                 }
 
             return groups;
@@ -171,16 +237,14 @@ namespace Dnevnik.DnevnikClasses
             return lessonsIds;
         }
 
-        public void GetMarksDiary(MarksTable table, ResetClass rst, DateTime startTime, DateTime endTime, Persons person, Groups group)
+        public void GetMarksDiary(SelectChildren children)
         {
             //var groupId = ((JArray)JsonConvert.DeserializeObject(api.GetPersonGroups(person.personId)))[0]["id"].Value<long>();
-            var groupId = group.id;
+            var groupId = children.group.id;
 
             var schoolId = ((JArray)JsonConvert.DeserializeObject(api.GetSchool()))[0]["id"].Value<long>();
 
-            var jsonLessons = api.GetGroupSubjects(groupId);
-
-            var lessons = ((JArray)JsonConvert.DeserializeObject(jsonLessons));
+            var lessons = ((JArray)JsonConvert.DeserializeObject(api.GetGroupSubjects(groupId)));
 
             var typeWork = ((JArray)JsonConvert.DeserializeObject(api.GetWorkTypes(schoolId)));
 
@@ -192,9 +256,9 @@ namespace Dnevnik.DnevnikClasses
                 nameLesson.Add(lesson["name"].Value<string>());
             }
 
-            var marksPerson = (JArray)JsonConvert.DeserializeObject(api.GetPersonMarks(person.personId, schoolId, startTime, endTime));
+            var marksPerson = (JArray)JsonConvert.DeserializeObject(api.GetPersonGroupMarks(children.Member.personId, groupId, children.StartDate, children.EndDate));
 
-            var lessonsIds = GetLessonId(((JArray)JsonConvert.DeserializeObject(api.GetGroupLessonsInfo(groupId, startTime, endTime))));
+            var lessonsIds = GetLessonId(((JArray)JsonConvert.DeserializeObject(api.GetGroupLessonsInfo(groupId, children.StartDate, children.EndDate))));
 
             /*
              * добавить парсинг значений lesson id из works!!!!!!
@@ -216,9 +280,19 @@ namespace Dnevnik.DnevnikClasses
                         }
                     }
                 }
+
+                var test = JsonConvert.DeserializeObject(api.GetGroupSubjectMarks(groupId, lessons[i]["id"].Value<long>(), children.StartDate, children.EndDate));
+
+                //foreach (JObject mark in test)
+                //{
+                //    var personId = mark["person"].Value<long>();
+
+                //    if (children.Member.personId == personId)
+                //        marks[i].Add(new InputMark { mark = mark["value"].Value<int>(), typeWork = mark["workType"].Value<long>() });
+                //}
             }
 
-            work = new ResultWorker() { table = table, rst = rst, marks = marks, nameLesson = nameLesson, typeWork = typeWork };
+            work = new ResultWorker() { table = children.table, rst = children.Reset, marks = marks, nameLesson = nameLesson, typeWork = typeWork };
         }
 
         public void InsertMarksInTable()

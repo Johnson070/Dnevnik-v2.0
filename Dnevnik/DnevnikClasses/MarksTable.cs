@@ -78,11 +78,11 @@ namespace Dnevnik.DnevnikClasses
             int[] _numBalls,
             bool mode = true) => 0;
 
-        internal virtual long FactFunc(long inFact) => 0;
+        internal virtual decimal FactFunc(decimal inFact) => 0;
 
-        public virtual long CountMarksRow(int k) => 0;
+        public virtual decimal CountMarksRow(int k) => 0;
 
-        public virtual long CountMarksRow(
+        public virtual decimal CountMarksRow(
             int k,
             int[] numBalls) => 0;
 

@@ -13,7 +13,7 @@ namespace Dnevnik
 {
     public partial class SettingsForm : Form
     {
-        bool settingsSave = false;
+        bool settingsSave = true;
 
         public SettingsForm()
         {
@@ -49,9 +49,9 @@ namespace Dnevnik
             Properties.Settings.Default.nameLess9 = textBox9.Text;
             Properties.Settings.Default.nameLess10 = textBox10.Text;
 
-            Properties.Settings.Default.averBall1 = Convert.ToSingle(numericUpDown1.Value);
-            Properties.Settings.Default.averBall2 = Convert.ToSingle(numericUpDown2.Value);
-            Properties.Settings.Default.averBall3 = Convert.ToSingle(numericUpDown3.Value);
+            Properties.Settings.Default.averBall1 = Convert.ToSingle(Mark2.Value);
+            Properties.Settings.Default.averBall2 = Convert.ToSingle(Mark3.Value);
+            Properties.Settings.Default.averBall3 = Convert.ToSingle(Mark4.Value);
         }
 
         private void UpdateData()
@@ -67,14 +67,14 @@ namespace Dnevnik
             textBox9.Text = GetTextProperties(9);
             textBox10.Text = GetTextProperties(10);
 
-            numericUpDown1.Value = Convert.ToDecimal(Properties.Settings.Default.averBall1);
-            numericUpDown2.Value = Convert.ToDecimal(Properties.Settings.Default.averBall2);
-            numericUpDown3.Value = Convert.ToDecimal(Properties.Settings.Default.averBall3);
+            Mark2.Value = Convert.ToDecimal(Properties.Settings.Default.averBall1);
+            Mark3.Value = Convert.ToDecimal(Properties.Settings.Default.averBall2);
+            Mark4.Value = Convert.ToDecimal(Properties.Settings.Default.averBall3);
         }
 
         private void SettingsForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (settingsSave)
+            if (!settingsSave)
             {
                 DialogResult quest = MessageBox.Show("Настройки не были сохранены, сохранить?", "Сохранить?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
@@ -89,6 +89,16 @@ namespace Dnevnik
             Properties.Settings.Default.Save();
             settingsSave = true;
             MessageBox.Show("Настройки сохранены!", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void ChangeValue(object sender, EventArgs e)
+        {
+            settingsSave = false;
+        }
+
+        private new void TextChanged(object sender, EventArgs e)
+        {
+            settingsSave = false;
         }
     }
 }

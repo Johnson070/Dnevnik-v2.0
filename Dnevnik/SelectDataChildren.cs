@@ -18,9 +18,9 @@ namespace Dnevnik
     {
         readonly List<List<int[]>> timeTable = new List<List<int[]>>()
         {
-            new List<int[]>{ new int[] {9, 10, -1, -1}, new int[] { 11, 12, -1, -1}, new int[] {1,3,0,0 }, new int[] {4,5,0,0 } },
-            new List<int[]>{ new int[] {9, 11, -1, -1}, new int[] { 12, 2, -1, 0}, new int[] {3,5,0,0 } },
-            new List<int[]>{ new int[] {9, 12, -1, -1}, new int[] { 1, 5,0,0} }
+            new List<int[]>{ new int[] {9, 10, -1, 0}, new int[] { 11, 12, -1, 0}, new int[] {1,3,0,1 }, new int[] {4,5,0,1 } },
+            new List<int[]>{ new int[] {9, 11, -1, 0}, new int[] { 12, 2, -1, 1}, new int[] {3,5,0,1 } },
+            new List<int[]>{ new int[] {9, 12, -1, 0}, new int[] { 1, 5,0,1} }
         };
 
         readonly List<string> selectPeriodList = new List<string>()
@@ -31,16 +31,21 @@ namespace Dnevnik
         };
 
         private bool updateDataBool = true;
+        private bool updateSchoolmates = false;
         public bool closeWindow = false;
         public int indexChild = -1;
+        public int indexChildGroup = -1;
         public int indexGroup = -1;
+        public bool updateYear = false;
         List<List<Persons>> persons;
+        List<List<Groups>> groups;
+        List<List<Persons>> members;
 
-        public SelectDataChildren(List<List<Persons>> persons, List<Groups> groups)
+        public SelectDataChildren(List<List<Persons>> persons, List<List<Persons>> members, List<List<Groups>> groups)
         {
             InitializeComponent();
 
-            SetChildrens(persons, groups);
+            SetChildrens(persons, members, groups);
         }
 
         private void SelectList()
@@ -66,20 +71,20 @@ namespace Dnevnik
 
                 int[] date = timeTable[TypeYearList.SelectedIndex][SelectPeriod.SelectedIndex];
 
-                StartDate.Value = new DateTime(DateTime.UtcNow.Year + date[2], date[0], 1);
+                StartDate.Value = new DateTime((groups[Childrens.SelectedIndex][studyYear.SelectedIndex].year + date[3]), date[0], 1, 0, 0, 1);
 
                 try
                 {
                     if (date[1] != 2)
                     {
                         if (date[1] % 2 == 0)
-                            EndDate.Value = new DateTime(DateTime.UtcNow.Year + date[3], date[1], 31);
+                            EndDate.Value = new DateTime(groups[Childrens.SelectedIndex][studyYear.SelectedIndex].year + date[3], date[1], 31);
                         else
-                            EndDate.Value = new DateTime(DateTime.UtcNow.Year + date[3], date[1], 30);
+                            EndDate.Value = new DateTime(groups[Childrens.SelectedIndex][studyYear.SelectedIndex].year + date[3], date[1], 30);
                     }
                     else
                     {
-                        EndDate.Value = new DateTime(DateTime.UtcNow.Year + date[3], date[1], 28);
+                        EndDate.Value = new DateTime(groups[Childrens.SelectedIndex][studyYear.SelectedIndex].year - date[3], date[1], 28);
                     }
                 }
                 catch
@@ -99,18 +104,26 @@ namespace Dnevnik
             updateDataBool = true;
         }
 
-        private void SetChildrens(List<List<Persons>> persons, List<Groups> groups)
+        private void SetChildrens(List<List<Persons>> persons, List<List<Persons>> members, List<List<Groups>> groups)
         {
-            foreach (Persons person in persons[persons.Count-1])
+            foreach (Persons person in members[members.Count - 1])
                 Childrens.Items.Add(person.userName);
 
-            foreach (Groups group in groups)
+            foreach (Persons person in persons[persons.Count - 1])
+                schoolmates.Items.Add(person.userName);
+
+            foreach (Groups group in groups[0])
                 studyYear.Items.Add($"{group.year}/{group.year + 1} {group.name}");
 
+            schoolmates.SelectedIndex = 0;
             Childrens.SelectedIndex = 0;
-            studyYear.SelectedIndex = studyYear.Items.Count-1;
+            studyYear.SelectedIndex = studyYear.Items.Count - 1;
 
             this.persons = persons;
+            this.groups = groups;
+            this.members = members;
+            updateYear = true;
+            updateSchoolmates = true;
         }
 
         private void SelectDataChildren_Shown(object sender, EventArgs e)
@@ -139,17 +152,56 @@ namespace Dnevnik
         private void CloseButton_Click(object sender, EventArgs e)
         {
             closeWindow = true;
-            indexChild = Childrens.SelectedIndex;
+            indexChild = schoolmates.SelectedIndex;
             indexGroup = studyYear.SelectedIndex;
+            indexChildGroup = Childrens.SelectedIndex;
             this.Close();
         }
 
         private void StudyYear_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Childrens.Items.Clear();
+            if (updateYear)
+            {
+                schoolmates.Items.Clear();
 
-            foreach (Persons person in persons[studyYear.SelectedIndex])
-                Childrens.Items.Add(person.userName);
+                foreach (Persons person in persons[studyYear.SelectedIndex])
+                    schoolmates.Items.Add(person.userName);
+
+                schoolmates.SelectedIndex = 0;
+
+                int year = groups[schoolmates.SelectedIndex][studyYear.SelectedIndex].year;
+
+                try
+                {
+                    StartDate.MinDate = new DateTime(year, 09, 01);
+                    StartDate.MaxDate = new DateTime(year + 1, 05, 31);
+                    EndDate.MinDate = new DateTime(year, 09, 01);
+                    EndDate.MaxDate = new DateTime(year + 1, 05, 31);
+                }
+                catch
+                {
+                    StartDate.MaxDate = new DateTime(year + 1, 05, 31);
+                    StartDate.MinDate = new DateTime(year, 09, 01);
+                    EndDate.MaxDate = new DateTime(year + 1, 05, 31);
+                    EndDate.MinDate = new DateTime(year, 09, 01);
+                }
+
+                //SelectPeriod.SelectedIndex = 0;
+
+                SelectList();
+            }
+        }
+
+        private void Childrens_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (updateSchoolmates)
+            {
+                foreach (Persons person in members[Childrens.SelectedIndex])
+                    schoolmates.Items.Add(person.userName);
+
+                schoolmates.SelectedIndex = 0;
+            }
+
         }
     }
 }

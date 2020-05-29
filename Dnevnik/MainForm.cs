@@ -5,12 +5,8 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
+using System.Net;
 using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Dnevnik
@@ -20,6 +16,9 @@ namespace Dnevnik
         List<MarksTable> table;
         readonly FileManager file = new FileManager();
 
+        [System.Runtime.InteropServices.DllImport("wininet.dll")]
+        private extern static bool InternetGetConnectedState(out int description, int reservedValue);
+
         public dnevnik()
         {
             InitializeComponent();
@@ -28,6 +27,16 @@ namespace Dnevnik
             this.deleteRowButton.Click += (sender, args) => { this.table[tabControl1.SelectedIndex].EditTable(2); CellFormating(null, null); };
             this.addColumnButton.Click += (sender, args) => { this.table[tabControl1.SelectedIndex].EditTable(3); CellFormating(null, null); };
             this.deleteColumnButton.Click += (sender, args) => { this.table[tabControl1.SelectedIndex].EditTable(4); CellFormating(null, null); };
+        }
+
+        public static bool IsInternetAvailable()
+        {
+            bool state = InternetGetConnectedState(out _, 0);
+
+            if (!state)
+                MessageBox.Show($"Проверьте соединение с интернетом.", "Нет доступа к интернету", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+            return state;
         }
 
         private void GenerateMarks(object sender, EventArgs e)
@@ -54,12 +63,9 @@ namespace Dnevnik
         {
             table[tabControl1.SelectedIndex].CellFormating();
 
-            //if (table is MarksTableAverage)
-            //a = ((MarksTableAverage)table).mark;
-            //else
-            //a = ((MarksTableAverageMass)table).mark;
-
             table[tabControl1.SelectedIndex].startEdit = true;
+
+            tabControl1.TabPages[tabControl1.SelectedIndex].Text = tabControl1.TabPages[tabControl1.SelectedIndex].Text.Replace(" *", string.Empty) + " *";
         }
 
         private void Dnevnik_Shown(object sender, EventArgs e)
@@ -96,7 +102,7 @@ namespace Dnevnik
         private void OpenFile_Click(object sender, EventArgs e)
         {
             if (table[tabControl1.SelectedIndex] is MarksTableAverageMass) table[tabControl1.SelectedIndex].CellClearNotValid();
-            table[tabControl1.SelectedIndex].CellFormating();
+            //table[tabControl1.SelectedIndex].CellFormating();
             file.OpenFile(table[tabControl1.SelectedIndex].marks, table[tabControl1.SelectedIndex].startEdit, table[tabControl1.SelectedIndex].fileOpen, table[tabControl1.SelectedIndex].type);
 
             table[tabControl1.SelectedIndex].CellFormating();
@@ -107,23 +113,28 @@ namespace Dnevnik
         {
             if (table[tabControl1.SelectedIndex] is MarksTableAverageMass) table[tabControl1.SelectedIndex].CellClearNotValid();
             table[tabControl1.SelectedIndex].CellFormating();
-            var state = file.SaveFile(table[tabControl1.SelectedIndex].marks, table[tabControl1.SelectedIndex].startEdit, table[tabControl1.SelectedIndex].type, tabControl1.SelectedTab.Text);
+            var state = file.SaveFile(table[tabControl1.SelectedIndex].marks, table[tabControl1.SelectedIndex].startEdit, table[tabControl1.SelectedIndex].type, tabControl1.SelectedTab.Text.Replace(" *", string.Empty));
 
-            table[tabControl1.SelectedIndex].CellFormating();
+            if (!state)
+                tabControl1.TabPages[tabControl1.SelectedIndex].Text = tabControl1.TabPages[tabControl1.SelectedIndex].Text.Replace(" *", string.Empty);
+
             table[tabControl1.SelectedIndex].startEdit = state;
         }
 
         private void Dnevnik_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (table[tabControl1.SelectedIndex].startEdit == true)
-            {
-                DialogResult rsl = MessageBox.Show("Сохранить файл перед закрытием?", "Сохранить файл?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-                if (rsl == DialogResult.Yes)
+            for (int i = 0; i < tabControl1.TabCount; i++)
+                if (table[i].startEdit == true)
                 {
-                    saveFile.PerformClick();
+                    tabControl1.SelectedIndex = i;
+
+                    DialogResult rsl = MessageBox.Show("Сохранить файл перед закрытием?", "Сохранить файл?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                    if (rsl == DialogResult.Yes)
+                    {
+                        saveFile.PerformClick();
+                    }
                 }
-            }
         }
 
         private void AddMarksInDnevnik_Click(object sender, EventArgs e)
@@ -161,49 +172,61 @@ namespace Dnevnik
             }
 
             if (closedSuccess)
-                try
+            //try
+            {
+                DnevnikWork workDnevnik = new DnevnikWork((keyAccess == "" ? Properties.Settings.Default.keyAccess : keyAccess));
+
+                if (table[tabControl1.SelectedIndex].startEdit == true)
                 {
-                    DnevnikWork workDnevnik = new DnevnikWork((keyAccess == "" ? Properties.Settings.Default.keyAccess : keyAccess));
+                    DialogResult rsl = MessageBox.Show("Сохранить таблицу в файл?\nТекущая таблица будет очищена перед вставкой оценок из ЭЖ.", "Сохранить?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-                    if (table[tabControl1.SelectedIndex].startEdit == true)
+                    if (rsl == DialogResult.Yes)
                     {
-                        DialogResult rsl = MessageBox.Show("Сохранить таблицу в файл?\nТекущая таблица будет очищена перед вставкой оценок из ЭЖ.", "Сохранить?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-                        if (rsl == DialogResult.Yes)
-                        {
-                            saveFile.PerformClick();
-                        }
-                    }
-
-                    ResetClass rst = new ResetClass(table[tabControl1.SelectedIndex], table[tabControl1.SelectedIndex].marks);
-                    ApiDiary api = new ApiDiary(keyAccess == "" ? Properties.Settings.Default.keyAccess : keyAccess);
-
-                    long personId = ((JObject)JsonConvert.DeserializeObject(api.GetContext()))["personId"].Value<long>();
-                    var groups = workDnevnik.GetAllGroups(personId);
-
-                    using SelectDataChildren criteriaForm = new SelectDataChildren(workDnevnik.GetMembers(groups), groups);
-                    criteriaForm.ShowDialog();
-
-                    if (criteriaForm.closeWindow)
-                    {
-                        Status.Visible = true;
-
-                        loadBar.Value = 20;
-                        loadBar.MarqueeAnimationSpeed = 45;
-                        tabControl1.Enabled = false;
-                        LabelLoad.Text = "Ожидайте пока программа вставит все оценки.";
-                        Tools.Enabled = false;
-                        table[tabControl1.SelectedIndex].marks.Enabled = false;
-
-                        int indexTab = tabControl1.SelectedIndex;
-
-                        WorkBack = new BackgroundWorker();
-                        WorkBack.DoWork += (obj, ea) => workDnevnik.GetMarksDiary(table[indexTab], rst, criteriaForm.StartDate.Value, criteriaForm.EndDate.Value, workDnevnik.GetMembers(groups)[criteriaForm.indexGroup][criteriaForm.indexChild], workDnevnik.GetAllGroups(personId)[criteriaForm.indexGroup]);
-                        WorkBack.RunWorkerCompleted += (obj, ea) => WorkBack_RunWorkerCompleted(workDnevnik);
-                        WorkBack.RunWorkerAsync();
+                        saveFile.PerformClick();
                     }
                 }
-                catch (Exception ex) { MessageBox.Show("Непредвиденная ошибка!\nПопробуйте повторить попытку, поменять параметры или перезапустить программу!"); Clipboard.SetText(ex.Message); }
+
+                ResetClass rst = new ResetClass(table[tabControl1.SelectedIndex], table[tabControl1.SelectedIndex].marks);
+                ApiDiary api = new ApiDiary(keyAccess == "" ? Properties.Settings.Default.keyAccess : keyAccess);
+
+                long personId = ((JObject)JsonConvert.DeserializeObject(api.GetContext()))["personId"].Value<long>();
+                var groups = workDnevnik.GetAllGroups(workDnevnik.GetMembers());
+
+                using SelectDataChildren criteriaForm = new SelectDataChildren(workDnevnik.GetMembers(groups), workDnevnik.GetMembers(), groups);
+                criteriaForm.ShowDialog();
+
+                if (criteriaForm.closeWindow)
+                {
+                    Status.Visible = true;
+
+                    loadBar.Value = 20;
+                    loadBar.MarqueeAnimationSpeed = 45;
+                    tabControl1.Enabled = false;
+                    LabelLoad.Text = "Ожидайте пока программа вставит все оценки.";
+                    Tools.Enabled = false;
+                    table[tabControl1.SelectedIndex].marks.Enabled = false;
+
+                    int indexTab = tabControl1.SelectedIndex;
+
+                    var test = workDnevnik.GetAllGroups(workDnevnik.GetMembers());
+
+                    SelectChildren children = new SelectChildren()
+                    {
+                        table = table[indexTab],
+                        Reset = rst,
+                        EndDate = criteriaForm.EndDate.Value,
+                        StartDate = criteriaForm.StartDate.Value,
+                        Member = workDnevnik.GetMembers(workDnevnik.GetAllGroups(workDnevnik.GetMembers()))[criteriaForm.indexGroup][criteriaForm.indexChild],
+                        group = workDnevnik.GetAllGroups(workDnevnik.GetMembers())[criteriaForm.indexChildGroup][criteriaForm.indexGroup]
+                    };
+
+                    WorkBack = new BackgroundWorker(); //WorkBack.DoWork += (obj, ea) => 
+                    WorkBack.DoWork += (obj, ea) => workDnevnik.GetMarksDiary(children);
+                    WorkBack.RunWorkerCompleted += (obj, ea) => WorkBack_RunWorkerCompleted(workDnevnik);
+                    WorkBack.RunWorkerAsync();
+                }
+            }
+            //catch (Exception ex) { MessageBox.Show("Непредвиденная ошибка!\nПопробуйте повторить попытку, поменять параметры или перезапустить программу!"); Clipboard.SetText(ex.Message); }
         }
 
         private void WorkBack_RunWorkerCompleted(DnevnikWork diary)
@@ -261,7 +284,10 @@ namespace Dnevnik
 
                 if (tab.type != table[tabControl1.SelectedIndex].type)
                 {
-                    DialogResult quest = MessageBox.Show("Вы сменили тип среднего балла, сохранить текущую таблицу?", "Сохранить?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    DialogResult quest = DialogResult.No;
+
+                    if (table[tabControl1.SelectedIndex].startEdit)
+                        quest = MessageBox.Show("Вы сменили тип среднего балла, сохранить текущую таблицу?", "Сохранить?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
                     if (quest == DialogResult.Yes)
                     {
@@ -294,6 +320,28 @@ namespace Dnevnik
                     table.RemoveAt(indexTab);
                 }
             }
+        }
+
+        private void UpdateInfo_Click(object sender, EventArgs e)
+        {
+            if (IsInternetAvailable())
+            {
+                string version = "";
+
+                using (WebClient Client = new WebClient())
+                {
+                    Client.Encoding = Encoding.UTF8;
+                    version = Client.DownloadString("https://raw.githubusercontent.com/Johnson070/Dnevnik-v2.0/master/change_log.txt");
+                }
+
+                MessageBox.Show(version);
+            }
+        }
+
+        private void SendMail_Click(object sender, EventArgs e)
+        {
+            using ErrorNotification mail = new ErrorNotification();
+            mail.ShowDialog();
         }
     }
 }

@@ -34,6 +34,9 @@
     <WarningLevel>4</WarningLevel>
     <LangVersion>8.0</LangVersion>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>icons8-журнал-100.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="ApiDiaryLibrary">
       <HintPath>..\..\WebBrowserParser\ApiDiaryLibrary\bin\Debug\ApiDiaryLibrary.dll</HintPath>
@@ -66,8 +69,15 @@
     <Compile Include="DnevnikClasses\MarksTableAverage.cs" />
     <Compile Include="DnevnikClasses\Persons.cs" />
     <Compile Include="DnevnikClasses\ResetClass.cs" />
+    <Compile Include="DnevnikClasses\SelectChildren.cs" />
     <Compile Include="DnevnikClasses\SortMarkStructAverageMass.cs" />
     <Compile Include="DnevnikClasses\SortMarkStructAverage.cs" />
+    <Compile Include="ErrorNotification.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ErrorNotification.Designer.cs">
+      <DependentUpon>ErrorNotification.cs</DependentUpon>
+    </Compile>
     <Compile Include="LoginDnevnik.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -118,6 +128,9 @@
     <Compile Include="TabSettings.Designer.cs">
       <DependentUpon>TabSettings.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="ErrorNotification.resx">
+      <DependentUpon>ErrorNotification.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="LoginDnevnik.resx">
       <DependentUpon>LoginDnevnik.cs</DependentUpon>
     </EmbeddedResource>
@@ -135,6 +148,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="SelectDataChildren.resx">
       <DependentUpon>SelectDataChildren.cs</DependentUpon>
@@ -165,6 +179,10 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="icons8-журнал-100.ico" />
+    <None Include="Resources\icons8-журнал-100.ico" />
+    <None Include="Resources\Icon1.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

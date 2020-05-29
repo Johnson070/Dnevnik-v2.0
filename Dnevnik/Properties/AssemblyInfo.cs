@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // набора атрибутов. Измените значения этих атрибутов для изменения сведений,
 // связанных со сборкой.
 [assembly: AssemblyTitle("Dnevnik")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Программа для анализа оценок!")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("vk.com/vveber070")]
 [assembly: AssemblyProduct("Dnevnik")]
-[assembly: AssemblyCopyright("Copyright iWeber©  2020")]
+[assembly: AssemblyCopyright("Copyright iWeber ©  2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dnevnik", "Dnevnik\Dnevnik.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiDiaryLibrary", "..\WebBrowserParser\ApiDiaryLibrary\ApiDiaryLibrary.csproj", "{6708A168-78D8-4F9C-B0D2-FBB39E151F47}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "DnevnikSetup", "DnevnikSetup\DnevnikSetup.vdproj", "{6F980DC6-9FD7-4E0D-85D3-90E59D0C630B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,8 @@ Global
 		{6708A168-78D8-4F9C-B0D2-FBB39E151F47}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6708A168-78D8-4F9C-B0D2-FBB39E151F47}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6708A168-78D8-4F9C-B0D2-FBB39E151F47}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F980DC6-9FD7-4E0D-85D3-90E59D0C630B}.Debug|Any CPU.ActiveCfg = Debug
+		{6F980DC6-9FD7-4E0D-85D3-90E59D0C630B}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

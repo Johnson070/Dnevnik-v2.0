@@ -51,19 +51,19 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
+            this.Mark4 = new System.Windows.Forms.NumericUpDown();
+            this.Mark3 = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.Mark2 = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.SaveSettings = new System.Windows.Forms.Button();
             this.ResetButton = new System.Windows.Forms.Button();
             this.weightNames.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Mark4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Mark3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Mark2)).BeginInit();
             this.SuspendLayout();
             // 
             // weightNames
@@ -193,6 +193,7 @@
             this.textBox8.Size = new System.Drawing.Size(206, 22);
             this.textBox8.TabIndex = 40;
             this.textBox8.Text = "Аудирование,Сочинение,Изложение";
+            this.textBox8.TextChanged += new System.EventHandler(this.TextChanged);
             // 
             // textBox7
             // 
@@ -202,6 +203,7 @@
             this.textBox7.TabIndex = 39;
             this.textBox7.Text = "Работа с контурными картами,Самостоятельная работа,Контрольное списывание,Словарн" +
     "ый диктант,Проверочная работа";
+            this.textBox7.TextChanged += new System.EventHandler(this.TextChanged);
             // 
             // textBox9
             // 
@@ -210,6 +212,7 @@
             this.textBox9.Size = new System.Drawing.Size(206, 22);
             this.textBox9.TabIndex = 39;
             this.textBox9.Text = "Практическая работа,Лабораторная работа,Творческая работа";
+            this.textBox9.TextChanged += new System.EventHandler(this.TextChanged);
             // 
             // textBox10
             // 
@@ -218,6 +221,7 @@
             this.textBox10.Size = new System.Drawing.Size(206, 22);
             this.textBox10.TabIndex = 39;
             this.textBox10.Text = resources.GetString("textBox10.Text");
+            this.textBox10.TextChanged += new System.EventHandler(this.TextChanged);
             // 
             // textBox6
             // 
@@ -226,6 +230,7 @@
             this.textBox6.Size = new System.Drawing.Size(206, 22);
             this.textBox6.TabIndex = 38;
             this.textBox6.Text = "Ответ на уроке";
+            this.textBox6.TextChanged += new System.EventHandler(this.TextChanged);
             // 
             // textBox5
             // 
@@ -233,6 +238,7 @@
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(206, 22);
             this.textBox5.TabIndex = 37;
+            this.textBox5.TextChanged += new System.EventHandler(this.TextChanged);
             // 
             // textBox4
             // 
@@ -240,6 +246,7 @@
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(206, 22);
             this.textBox4.TabIndex = 36;
+            this.textBox4.TextChanged += new System.EventHandler(this.TextChanged);
             // 
             // textBox3
             // 
@@ -247,6 +254,7 @@
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(206, 22);
             this.textBox3.TabIndex = 35;
+            this.textBox3.TextChanged += new System.EventHandler(this.TextChanged);
             // 
             // textBox2
             // 
@@ -254,6 +262,7 @@
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(206, 22);
             this.textBox2.TabIndex = 34;
+            this.textBox2.TextChanged += new System.EventHandler(this.TextChanged);
             // 
             // textBox1
             // 
@@ -261,14 +270,15 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(206, 22);
             this.textBox1.TabIndex = 33;
+            this.textBox1.TextChanged += new System.EventHandler(this.TextChanged);
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.numericUpDown3);
-            this.groupBox1.Controls.Add(this.numericUpDown2);
+            this.groupBox1.Controls.Add(this.Mark4);
+            this.groupBox1.Controls.Add(this.Mark3);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.numericUpDown1);
+            this.groupBox1.Controls.Add(this.Mark2);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(12, 313);
             this.groupBox1.Name = "groupBox1";
@@ -277,61 +287,63 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Порог оценки";
             // 
-            // numericUpDown3
+            // Mark4
             // 
-            this.numericUpDown3.DecimalPlaces = 1;
-            this.numericUpDown3.Increment = new decimal(new int[] {
+            this.Mark4.DecimalPlaces = 1;
+            this.Mark4.Increment = new decimal(new int[] {
             1,
             0,
             0,
             65536});
-            this.numericUpDown3.Location = new System.Drawing.Point(126, 71);
-            this.numericUpDown3.Maximum = new decimal(new int[] {
+            this.Mark4.Location = new System.Drawing.Point(126, 71);
+            this.Mark4.Maximum = new decimal(new int[] {
             50,
             0,
             0,
             65536});
-            this.numericUpDown3.Minimum = new decimal(new int[] {
+            this.Mark4.Minimum = new decimal(new int[] {
             20,
             0,
             0,
             65536});
-            this.numericUpDown3.Name = "numericUpDown3";
-            this.numericUpDown3.Size = new System.Drawing.Size(48, 20);
-            this.numericUpDown3.TabIndex = 5;
-            this.numericUpDown3.Value = new decimal(new int[] {
+            this.Mark4.Name = "Mark4";
+            this.Mark4.Size = new System.Drawing.Size(48, 20);
+            this.Mark4.TabIndex = 5;
+            this.Mark4.Value = new decimal(new int[] {
             20,
             0,
             0,
             65536});
+            this.Mark4.ValueChanged += new System.EventHandler(this.ChangeValue);
             // 
-            // numericUpDown2
+            // Mark3
             // 
-            this.numericUpDown2.DecimalPlaces = 1;
-            this.numericUpDown2.Increment = new decimal(new int[] {
+            this.Mark3.DecimalPlaces = 1;
+            this.Mark3.Increment = new decimal(new int[] {
             1,
             0,
             0,
             65536});
-            this.numericUpDown2.Location = new System.Drawing.Point(126, 45);
-            this.numericUpDown2.Maximum = new decimal(new int[] {
+            this.Mark3.Location = new System.Drawing.Point(126, 45);
+            this.Mark3.Maximum = new decimal(new int[] {
             50,
             0,
             0,
             65536});
-            this.numericUpDown2.Minimum = new decimal(new int[] {
+            this.Mark3.Minimum = new decimal(new int[] {
             20,
             0,
             0,
             65536});
-            this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(48, 20);
-            this.numericUpDown2.TabIndex = 4;
-            this.numericUpDown2.Value = new decimal(new int[] {
+            this.Mark3.Name = "Mark3";
+            this.Mark3.Size = new System.Drawing.Size(48, 20);
+            this.Mark3.TabIndex = 4;
+            this.Mark3.Value = new decimal(new int[] {
             20,
             0,
             0,
             65536});
+            this.Mark3.ValueChanged += new System.EventHandler(this.ChangeValue);
             // 
             // label3
             // 
@@ -340,7 +352,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(57, 13);
             this.label3.TabIndex = 3;
-            this.label3.Text = "Оценка 2:";
+            this.label3.Text = "Оценка 4:";
             // 
             // label2
             // 
@@ -351,33 +363,34 @@
             this.label2.TabIndex = 2;
             this.label2.Text = "Оценка 3:";
             // 
-            // numericUpDown1
+            // Mark2
             // 
-            this.numericUpDown1.DecimalPlaces = 1;
-            this.numericUpDown1.Increment = new decimal(new int[] {
+            this.Mark2.DecimalPlaces = 1;
+            this.Mark2.Increment = new decimal(new int[] {
             1,
             0,
             0,
             65536});
-            this.numericUpDown1.Location = new System.Drawing.Point(126, 19);
-            this.numericUpDown1.Maximum = new decimal(new int[] {
+            this.Mark2.Location = new System.Drawing.Point(126, 19);
+            this.Mark2.Maximum = new decimal(new int[] {
             50,
             0,
             0,
             65536});
-            this.numericUpDown1.Minimum = new decimal(new int[] {
+            this.Mark2.Minimum = new decimal(new int[] {
             20,
             0,
             0,
             65536});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(48, 20);
-            this.numericUpDown1.TabIndex = 1;
-            this.numericUpDown1.Value = new decimal(new int[] {
+            this.Mark2.Name = "Mark2";
+            this.Mark2.Size = new System.Drawing.Size(48, 20);
+            this.Mark2.TabIndex = 1;
+            this.Mark2.Value = new decimal(new int[] {
             20,
             0,
             0,
             65536});
+            this.Mark2.ValueChanged += new System.EventHandler(this.ChangeValue);
             // 
             // label1
             // 
@@ -386,7 +399,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(57, 13);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Оценка 4:";
+            this.label1.Text = "Оценка 2:";
             // 
             // SaveSettings
             // 
@@ -427,9 +440,9 @@
             this.weightNames.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Mark4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Mark3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Mark2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -460,11 +473,11 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.NumericUpDown Mark2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button SaveSettings;
-        private System.Windows.Forms.NumericUpDown numericUpDown3;
-        private System.Windows.Forms.NumericUpDown numericUpDown2;
+        private System.Windows.Forms.NumericUpDown Mark4;
+        private System.Windows.Forms.NumericUpDown Mark3;
         private System.Windows.Forms.Button ResetButton;
     }
 }

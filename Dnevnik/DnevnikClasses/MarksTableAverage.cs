@@ -220,7 +220,7 @@ namespace Dnevnik.DnevnikClasses
             return 0;
         }
 
-        internal override long FactFunc(long inFact)
+        internal override decimal FactFunc(decimal inFact)
         {
 
             if (inFact <= 1)
@@ -229,15 +229,15 @@ namespace Dnevnik.DnevnikClasses
             }
             else
             {
-                long c = inFact * FactFunc(inFact - 1);
+                decimal c = inFact * FactFunc(inFact - 1);
                 return c;
             }
             
         }
 
-        public override long CountMarksRow(int k)
+        public override decimal CountMarksRow(int k)
         {
-            long count = (FactFunc(4 + k - 1)) / (FactFunc(k) * FactFunc(4 - 1));
+            decimal count = (FactFunc(4 + k - 1)) / (FactFunc(k) * FactFunc(4 - 1));
             return count;
         }
 
@@ -369,7 +369,7 @@ namespace Dnevnik.DnevnikClasses
 
                 if (frm.aveBall != null)
                 {
-                    long countMarks = CountMarksRow(frm.numBalls);
+                    decimal countMarks = CountMarksRow(frm.numBalls);
                     DialogResult result = DialogResult.OK;
 
                     if (countMarks > 1000)
@@ -430,9 +430,9 @@ namespace Dnevnik.DnevnikClasses
 
         public override void CellFormating()
         {
+            CheckCell();
             InputMark();
             ResultBall(mark);
-            CheckCell();
             ColorTableMarks();
         }
     }

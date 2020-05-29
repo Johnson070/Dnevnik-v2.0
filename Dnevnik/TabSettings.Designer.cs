@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TabSettings));
             this.label1 = new System.Windows.Forms.Label();
             this.NameTab = new System.Windows.Forms.TextBox();
             this.TypeAverage = new System.Windows.Forms.RadioButton();
@@ -99,6 +100,7 @@
             this.Controls.Add(this.NameTab);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "TabSettings";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Настройка вкладки";

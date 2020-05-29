@@ -284,7 +284,7 @@ namespace Dnevnik.DnevnikClasses
             return count;
         }
 
-        internal override long FactFunc(long inFact)
+        internal override decimal FactFunc(decimal inFact)
         {
 
             if (inFact <= 1)
@@ -293,16 +293,16 @@ namespace Dnevnik.DnevnikClasses
             }
             else
             {
-                long c = inFact * FactFunc(inFact - 1);
+                decimal c = inFact * FactFunc(inFact - 1);
                 return c;
             }
             
         }
 
-        public override long CountMarksRow(int k, int[] numBalls)
+        public override decimal CountMarksRow(int k, int[] numBalls)
         {
-            long count = (FactFunc(4 + k - 1)) / (FactFunc(k) * FactFunc(4 - 1));
-            return count * Convert.ToInt64(GetCountBalls(numBalls));
+            decimal count = (FactFunc(4 + k - 1)) / (FactFunc(k) * FactFunc(4 - 1));
+            return count * Convert.ToDecimal(GetCountBalls(numBalls));
         }
 
         internal override List<float> SortMarks(SortMarkStructAverageMass sort, int[] _numBalls, List<int[]> _marksWeights)
@@ -475,7 +475,7 @@ namespace Dnevnik.DnevnikClasses
         {
             if (marks.CurrentCell != null)
             {
-                SortData frm = new SortData();
+                using SortData frm = new SortData();
                 MarksDataAverageMass data;
                 List<int[]> marksWeights = (mark.Count != 0 ? mark[marks.CurrentCell.RowIndex] : null);
 
@@ -484,7 +484,7 @@ namespace Dnevnik.DnevnikClasses
 
                 if (frm.averBall != null && GetCountBalls(frm.countMarks,false) != 0)
                 {
-                    long countMarks = CountMarksRow(GetCountBalls(frm.countMarks, false), frm.countMarks);
+                    decimal countMarks = CountMarksRow(GetCountBalls(frm.countMarks, false), frm.countMarks);
                     DialogResult result = DialogResult.OK;
 
                     if (countMarks > 1000)
@@ -504,41 +504,42 @@ namespace Dnevnik.DnevnikClasses
                             data.oldBall = 0.00f;
                         }
 
-                        using MarksSelect selectForm = new MarksSelect(data)
+                        using (MarksSelect selectForm = new MarksSelect(data)
                         {
                             Text = marks[0, marks.CurrentCell.RowIndex].Value.ToString()
-                        };
-
-                        try
+                        })
                         {
-                            selectForm.ShowDialog();
-                        }
-                        catch
-                        {
-                            MessageBox.Show("Слишком большое кол-во оценок.\rПопробуйте изменить критерии поиска или изменить кол-во оценок.");
-                        }
-
-                        if (selectForm.selectedRow != null)
-                        {
-                            int countCol;
-
-                            if (((marks.ColumnCount - 2)/2 - mark[marks.CurrentCell.RowIndex].Count - selectForm.selectedRow.Count <= 0))
+                            try
                             {
-                                countCol = Math.Abs((marks.ColumnCount - 2) / 2 - mark[marks.CurrentCell.RowIndex].Count - selectForm.selectedRow.Count);
-
-                                ColumnGenBallWeight(countCol);
+                                selectForm.ShowDialog();
+                            }
+                            catch
+                            {
+                                MessageBox.Show("Слишком большое кол-во оценок.\rПопробуйте изменить критерии поиска или изменить кол-во оценок.");
                             }
 
-                            int index = mark[marks.CurrentCell.RowIndex].Count * 2 + 1, indexMark = 0;
-
-                            for (int i = 0; i < selectForm.selectedRow.Count*2; i++)
+                            if (selectForm.selectedRow != null)
                             {
-                                if (i % 2 == 0)
-                                    marks[index + i, marks.CurrentCell.RowIndex].Value = selectForm.selectedRow[indexMark][0];
-                                else
+                                int countCol;
+
+                                if (((marks.ColumnCount - 2) / 2 - mark[marks.CurrentCell.RowIndex].Count - selectForm.selectedRow.Count <= 0))
                                 {
-                                    marks[index + i, marks.CurrentCell.RowIndex].Value = selectForm.selectedRow[indexMark][1];
-                                    indexMark++;
+                                    countCol = Math.Abs((marks.ColumnCount - 2) / 2 - mark[marks.CurrentCell.RowIndex].Count - selectForm.selectedRow.Count);
+
+                                    ColumnGenBallWeight(countCol);
+                                }
+
+                                int index = mark[marks.CurrentCell.RowIndex].Count * 2 + 1, indexMark = 0;
+
+                                for (int i = 0; i < selectForm.selectedRow.Count * 2; i++)
+                                {
+                                    if (i % 2 == 0)
+                                        marks[index + i, marks.CurrentCell.RowIndex].Value = selectForm.selectedRow[indexMark][0];
+                                    else
+                                    {
+                                        marks[index + i, marks.CurrentCell.RowIndex].Value = selectForm.selectedRow[indexMark][1];
+                                        indexMark++;
+                                    }
                                 }
                             }
                         }
@@ -549,9 +550,9 @@ namespace Dnevnik.DnevnikClasses
 
         public override void CellFormating()
         {
+            CheckCell();
             InputMark();
             ResultBall(mark);
-            CheckCell();
             ColorTableMarks();
         }
 
