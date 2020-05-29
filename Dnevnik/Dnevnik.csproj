@@ -58,6 +58,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AboutDnevnik.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AboutDnevnik.Designer.cs">
+      <DependentUpon>AboutDnevnik.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DnevnikClasses\CheckUpdate.cs" />
     <Compile Include="DnevnikClasses\ColumnClass.cs" />
     <Compile Include="DnevnikClasses\DnevnikWork.cs" />
     <Compile Include="DnevnikClasses\FileManager.cs" />
@@ -128,6 +135,9 @@
     <Compile Include="TabSettings.Designer.cs">
       <DependentUpon>TabSettings.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="AboutDnevnik.resx">
+      <DependentUpon>AboutDnevnik.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ErrorNotification.resx">
       <DependentUpon>ErrorNotification.cs</DependentUpon>
     </EmbeddedResource>

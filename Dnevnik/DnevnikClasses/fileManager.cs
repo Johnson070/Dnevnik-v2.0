@@ -28,7 +28,7 @@ namespace Dnevnik.DnevnikClasses
 
             using OpenFileDialog loadFileDialog = new OpenFileDialog
             {
-                Filter = "json Файл (*.json)|*.json|txt Файл (*.txt)|*.txt",
+                Filter = "json Файл (*.dnv)|*.dnv|txt Файл (*.txt)|*.txt",
                 RestoreDirectory = true
             };
 
@@ -134,7 +134,7 @@ namespace Dnevnik.DnevnikClasses
 
             using SaveFileDialog saveLevelDialog = new SaveFileDialog
             {
-                Filter = "json Файл (*.json)|*.json|txt Файл (*.txt)|*.txt",
+                Filter = "json Файл (*.dnv)|*.dnv|txt Файл (*.txt)|*.txt",
                 RestoreDirectory = true,
                 FileName = fileName
             };

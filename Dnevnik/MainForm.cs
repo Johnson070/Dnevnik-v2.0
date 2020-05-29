@@ -326,15 +326,7 @@ namespace Dnevnik
         {
             if (IsInternetAvailable())
             {
-                string version = "";
-
-                using (WebClient Client = new WebClient())
-                {
-                    Client.Encoding = Encoding.UTF8;
-                    version = Client.DownloadString("https://raw.githubusercontent.com/Johnson070/Dnevnik-v2.0/master/change_log.txt");
-                }
-
-                MessageBox.Show(version);
+                
             }
         }
 
@@ -342,6 +334,14 @@ namespace Dnevnik
         {
             using ErrorNotification mail = new ErrorNotification();
             mail.ShowDialog();
+        }
+
+        private void AboutProgram_Click(object sender, EventArgs e)
+        {
+            AboutDnevnik about = new AboutDnevnik();
+            
+            about.ShowDialog();
+            
         }
     }
 }

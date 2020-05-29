@@ -58,7 +58,7 @@
             this.UpdateInfo = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.SendMail = new System.Windows.Forms.ToolStripMenuItem();
-            this.оПрограммеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.AboutProgram = new System.Windows.Forms.ToolStripMenuItem();
             this.Status = new System.Windows.Forms.StatusStrip();
             this.loadBar = new System.Windows.Forms.ToolStripProgressBar();
             this.LabelLoad = new System.Windows.Forms.ToolStripStatusLabel();
@@ -258,7 +258,7 @@
             this.UpdateInfo,
             this.toolStripSeparator7,
             this.SendMail,
-            this.оПрограммеToolStripMenuItem});
+            this.AboutProgram});
             this.mainList.Image = ((System.Drawing.Image)(resources.GetObject("mainList.Image")));
             this.mainList.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.mainList.Name = "mainList";
@@ -298,11 +298,12 @@
             this.SendMail.Text = "Репорт об ошибках и предложений";
             this.SendMail.Click += new System.EventHandler(this.SendMail_Click);
             // 
-            // оПрограммеToolStripMenuItem
+            // AboutProgram
             // 
-            this.оПрограммеToolStripMenuItem.Name = "оПрограммеToolStripMenuItem";
-            this.оПрограммеToolStripMenuItem.Size = new System.Drawing.Size(271, 22);
-            this.оПрограммеToolStripMenuItem.Text = "О программе";
+            this.AboutProgram.Name = "AboutProgram";
+            this.AboutProgram.Size = new System.Drawing.Size(271, 22);
+            this.AboutProgram.Text = "О программе";
+            this.AboutProgram.Click += new System.EventHandler(this.AboutProgram_Click);
             // 
             // Status
             // 
@@ -458,7 +459,7 @@
         private System.Windows.Forms.ToolStripMenuItem settingsButtonTool;
         private System.Windows.Forms.ToolStripMenuItem обновлениеПрограммыToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
-        private System.Windows.Forms.ToolStripMenuItem оПрограммеToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem AboutProgram;
         private System.Windows.Forms.ToolStripProgressBar loadBar;
         private System.Windows.Forms.ToolStripStatusLabel LabelLoad;
         private System.ComponentModel.BackgroundWorker WorkBack;
