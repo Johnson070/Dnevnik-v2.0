@@ -29,6 +29,8 @@ namespace Dnevnik
         private void SettingsForm_Shown(object sender, EventArgs e)
         {
             UpdateData();
+
+            settingsSave = true;
         }
 
         private string GetTextProperties(int num)
@@ -52,6 +54,7 @@ namespace Dnevnik
             Properties.Settings.Default.averBall1 = Convert.ToSingle(Mark2.Value);
             Properties.Settings.Default.averBall2 = Convert.ToSingle(Mark3.Value);
             Properties.Settings.Default.averBall3 = Convert.ToSingle(Mark4.Value);
+            Properties.Settings.Default.marksClassmates = ClassmatesInsert.Checked;
         }
 
         private void UpdateData()
@@ -70,6 +73,7 @@ namespace Dnevnik
             Mark2.Value = Convert.ToDecimal(Properties.Settings.Default.averBall1);
             Mark3.Value = Convert.ToDecimal(Properties.Settings.Default.averBall2);
             Mark4.Value = Convert.ToDecimal(Properties.Settings.Default.averBall3);
+            ClassmatesInsert.Checked = Properties.Settings.Default.marksClassmates;
         }
 
         private void SettingsForm_FormClosing(object sender, FormClosingEventArgs e)

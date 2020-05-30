@@ -228,5 +228,17 @@ namespace Dnevnik.Properties {
                 this["keyAccess"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool marksClassmates {
+            get {
+                return ((bool)(this["marksClassmates"]));
+            }
+            set {
+                this["marksClassmates"] = value;
+            }
+        }
     }
 }

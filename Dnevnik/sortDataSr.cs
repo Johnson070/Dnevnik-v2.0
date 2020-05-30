@@ -21,7 +21,7 @@ namespace Dnevnik
             InitializeComponent();
         }
 
-        private void genButton_Click(object sender, EventArgs e)
+        private void GenButton_Click(object sender, EventArgs e)
         {
             numBalls = Convert.ToInt32(numericUpDown1.Value);
 

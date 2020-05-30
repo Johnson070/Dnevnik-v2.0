@@ -23,12 +23,12 @@ namespace Dnevnik
             
         }
 
-        private void memberCred_CheckedChanged(object sender, EventArgs e)
+        private void MemberCred_CheckedChanged(object sender, EventArgs e)
         {
             MessageBox.Show("Введённые вами данные не будут сохранятся, будет сохраняться только AccessToken, для последующего доступа к дневнику.", "Иннформация", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        private void login_Click(object sender, EventArgs e)
+        private void Login_Click(object sender, EventArgs e)
         {
             try
             {   
@@ -37,10 +37,10 @@ namespace Dnevnik
 
                 if (memberCred.Checked)
                 {
-                    Properties.Settings.Default.keyAccess = api.getAccessToken();
+                    Properties.Settings.Default.keyAccess = api.GetAccessToken();
                     Properties.Settings.Default.Save();
                 }
-                else keyAccess = api.getAccessToken();
+                else keyAccess = api.GetAccessToken();
 
                 MessageBox.Show("Успешный вход!", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
 

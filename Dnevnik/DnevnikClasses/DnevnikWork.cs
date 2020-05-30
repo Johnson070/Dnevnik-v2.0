@@ -196,7 +196,7 @@ namespace Dnevnik.DnevnikClasses
                     foreach (JObject group in groupsJ)
                         if (group["type"].Value<string>() == "Group")
                         {
-                            groups[i].Add(new Groups() { id = group["id_str"].Value<long>(), name = group["name"].Value<string>(), year = group["studyyear"].Value<int>() });
+                            groups[i].Add(new Groups() { id = group["id"].Value<long>(), name = group["name"].Value<string>(), year = group["studyyear"].Value<int>() });
                         }
                 }
 
@@ -281,7 +281,7 @@ namespace Dnevnik.DnevnikClasses
                     }
                 }
 
-                var test = JsonConvert.DeserializeObject(api.GetGroupSubjectMarks(groupId, lessons[i]["id"].Value<long>(), children.StartDate, children.EndDate));
+                //var test = JsonConvert.DeserializeObject(api.GetGroupSubjectMarks(groupId, lessons[i]["id"].Value<long>(), children.StartDate, children.EndDate));
 
                 //foreach (JObject mark in test)
                 //{

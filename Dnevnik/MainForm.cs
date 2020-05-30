@@ -32,6 +32,11 @@ namespace Dnevnik
             this.deleteRowButton.Click += (sender, args) => { this.tables[TabMarks.SelectedIndex].EditTable(2); CellFormating(null, null); };
             this.addColumnButton.Click += (sender, args) => { this.tables[TabMarks.SelectedIndex].EditTable(3); CellFormating(null, null); };
             this.deleteColumnButton.Click += (sender, args) => { this.tables[TabMarks.SelectedIndex].EditTable(4); CellFormating(null, null); };
+
+            this.AddRowMenu.Click += (sender, args) => { this.tables[TabMarks.SelectedIndex].EditTable(1); CellFormating(null, null); };
+            this.DelRowMenu.Click += (sender, args) => { this.tables[TabMarks.SelectedIndex].EditTable(2); CellFormating(null, null); };
+            this.AddColumnMenu.Click += (sender, args) => { this.tables[TabMarks.SelectedIndex].EditTable(3); CellFormating(null, null); };
+            this.DelColumnMenu.Click += (sender, args) => { this.tables[TabMarks.SelectedIndex].EditTable(4); CellFormating(null, null); };
         }
 
         public static bool IsInternetAvailable()
@@ -104,7 +109,7 @@ namespace Dnevnik
             }
             catch { }
 
-            ProgramUpdate.PerformClick();
+            CheckUpdateFunc();
         }
 
         private void ChangeLog()
@@ -198,7 +203,7 @@ namespace Dnevnik
                 }
         }
 
-        private void AddMarksInDnevnik_Click(object sender, EventArgs e)
+        private void AddMarksFromDnevnik_Click(object sender, EventArgs e)
         {
             string keyAccess = "";
             bool closedSuccess = false;
@@ -253,7 +258,7 @@ namespace Dnevnik
                     long personId = ((JObject)JsonConvert.DeserializeObject(api.GetContext()))["personId"].Value<long>();
                     var groups = workDnevnik.GetAllGroups(workDnevnik.GetMembers());
 
-                    using SelectDataChildren criteriaForm = new SelectDataChildren(workDnevnik.GetMembers(groups), workDnevnik.GetMembers(), groups);
+                    using SelectDataChildren criteriaForm = new SelectDataChildren(workDnevnik.GetMembers(groups, Properties.Settings.Default.marksClassmates), workDnevnik.GetMembers(), groups);
                     criteriaForm.ShowDialog();
 
                     if (criteriaForm.closeWindow)
@@ -278,7 +283,7 @@ namespace Dnevnik
                             Reset = rst,
                             EndDate = criteriaForm.EndDate.Value,
                             StartDate = criteriaForm.StartDate.Value,
-                            Member = workDnevnik.GetMembers(workDnevnik.GetAllGroups(workDnevnik.GetMembers()))[criteriaForm.indexGroup][criteriaForm.indexChild],
+                            Member = workDnevnik.GetMembers(workDnevnik.GetAllGroups(workDnevnik.GetMembers()), Properties.Settings.Default.marksClassmates)[criteriaForm.indexGroup][criteriaForm.indexChild],
                             group = workDnevnik.GetAllGroups(workDnevnik.GetMembers())[criteriaForm.indexChildGroup][criteriaForm.indexGroup]
                         };
 
@@ -309,7 +314,7 @@ namespace Dnevnik
             AddTabFunc();
         }
 
-        private void AddTabFunc(bool type = false, bool newTab = false)
+        private void AddTabFunc(bool type = true, bool newTab = false)
         {
             if (!newTab)
             {
@@ -328,7 +333,7 @@ namespace Dnevnik
                 {
                     Dock = DockStyle.Fill,
                     ReadOnly = false,
-                    ContextMenuStrip = contextMenuStrip2,
+                    ContextMenuStrip = TableMenu,
                     AllowDrop = true
                 };
 
@@ -355,7 +360,7 @@ namespace Dnevnik
                 {
                     Dock = DockStyle.Fill,
                     ReadOnly = false,
-                    ContextMenuStrip = contextMenuStrip2,
+                    ContextMenuStrip = TableMenu,
                     AllowDrop = true
                 };
 
@@ -440,23 +445,30 @@ namespace Dnevnik
 
         private void AboutProgram_Click(object sender, EventArgs e)
         {
-            AboutDnevnik about = new AboutDnevnik();
-
+            using AboutDnevnik about = new AboutDnevnik();
             about.ShowDialog();
         }
 
         private void ProgramUpdate_Click(object sender, EventArgs e)
         {
+            CheckUpdateFunc(true);
+        }
+
+        private void CheckUpdateFunc(bool show = false)
+        {
             CheckUpdate update = new CheckUpdate();
 
             var text = update.CheckProgramUpdate();
-            var version = update.GetVersion();
+            var version = update.GetVersion().Replace("\n", string.Empty);
 
 
             DialogResult updateResult;
 
-            if (!String.Equals(version, Application.ProductVersion))
-                MessageBox.Show(text + "\n\r\n\rОбновление не требуется.", "Обновление", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            if (String.Equals(version, Application.ProductVersion))
+            {
+                if (show)
+                    MessageBox.Show(text + "\n\r\n\rОбновление не требуется.", "Обновление", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
             else
             {
                 updateResult = MessageBox.Show(text + "\n\r\n\rТребуется обновление. Обновить ПО?", "Обновление", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
@@ -510,6 +522,11 @@ namespace Dnevnik
         new void DragEnter(object sender, DragEventArgs e)
         {
             e.Effect = DragDropEffects.Move;
+        }
+
+        private void FormatTable_Click(object sender, EventArgs e)
+        {
+            tables[TabMarks.SelectedIndex].CellFormating();
         }
     }
 }

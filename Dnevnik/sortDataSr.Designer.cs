@@ -82,7 +82,7 @@
             this.genButton.TabIndex = 13;
             this.genButton.Text = "Генерировать";
             this.genButton.UseVisualStyleBackColor = true;
-            this.genButton.Click += new System.EventHandler(this.genButton_Click);
+            this.genButton.Click += new System.EventHandler(this.GenButton_Click);
             // 
             // numericUpDown4
             // 

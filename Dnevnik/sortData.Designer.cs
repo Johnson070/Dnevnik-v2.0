@@ -79,7 +79,7 @@
             this.selectButton.Size = new System.Drawing.Size(87, 22);
             this.selectButton.Text = "Генерировать";
             this.selectButton.ToolTipText = "Закончить выбор критериев";
-            this.selectButton.Click += new System.EventHandler(this.selectButton_Click);
+            this.selectButton.Click += new System.EventHandler(this.SelectButton_Click);
             // 
             // resetSort
             // 
@@ -90,7 +90,7 @@
             this.resetSort.Size = new System.Drawing.Size(46, 22);
             this.resetSort.Text = "Сброс";
             this.resetSort.ToolTipText = "Сброс критериев";
-            this.resetSort.Click += new System.EventHandler(this.resetSort_Click);
+            this.resetSort.Click += new System.EventHandler(this.ResetSort_Click);
             // 
             // averageBallTool
             // 
@@ -331,7 +331,7 @@
             this.Name = "SortData";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "sortData";
-            this.Shown += new System.EventHandler(this.sortData_Shown);
+            this.Shown += new System.EventHandler(this.SortData_Shown);
             this.sortTool.ResumeLayout(false);
             this.sortTool.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);

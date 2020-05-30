@@ -59,6 +59,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.SaveSettings = new System.Windows.Forms.Button();
             this.ResetButton = new System.Windows.Forms.Button();
+            this.ClassmatesInsert = new System.Windows.Forms.CheckBox();
             this.weightNames.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Mark4)).BeginInit();
@@ -403,7 +404,8 @@
             // 
             // SaveSettings
             // 
-            this.SaveSettings.Location = new System.Drawing.Point(12, 453);
+            this.SaveSettings.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.SaveSettings.Location = new System.Drawing.Point(12, 478);
             this.SaveSettings.Name = "SaveSettings";
             this.SaveSettings.Size = new System.Drawing.Size(247, 39);
             this.SaveSettings.TabIndex = 15;
@@ -413,7 +415,8 @@
             // 
             // ResetButton
             // 
-            this.ResetButton.Location = new System.Drawing.Point(12, 422);
+            this.ResetButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.ResetButton.Location = new System.Drawing.Point(12, 447);
             this.ResetButton.Name = "ResetButton";
             this.ResetButton.Size = new System.Drawing.Size(247, 23);
             this.ResetButton.TabIndex = 16;
@@ -421,17 +424,31 @@
             this.ResetButton.UseVisualStyleBackColor = true;
             this.ResetButton.Click += new System.EventHandler(this.ResetSettings_Click);
             // 
+            // ClassmatesInsert
+            // 
+            this.ClassmatesInsert.AutoSize = true;
+            this.ClassmatesInsert.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.ClassmatesInsert.Location = new System.Drawing.Point(12, 422);
+            this.ClassmatesInsert.Name = "ClassmatesInsert";
+            this.ClassmatesInsert.Size = new System.Drawing.Size(242, 20);
+            this.ClassmatesInsert.TabIndex = 17;
+            this.ClassmatesInsert.Text = "Вставка оценок одноклассников";
+            this.ClassmatesInsert.UseVisualStyleBackColor = true;
+            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(269, 504);
+            this.ClientSize = new System.Drawing.Size(269, 529);
+            this.Controls.Add(this.ClassmatesInsert);
             this.Controls.Add(this.ResetButton);
             this.Controls.Add(this.SaveSettings);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.weightNames);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximumSize = new System.Drawing.Size(285, 568);
+            this.MinimumSize = new System.Drawing.Size(285, 568);
             this.Name = "SettingsForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Настройки";
@@ -445,6 +462,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.Mark3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Mark2)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -480,5 +498,6 @@
         private System.Windows.Forms.NumericUpDown Mark4;
         private System.Windows.Forms.NumericUpDown Mark3;
         private System.Windows.Forms.Button ResetButton;
+        private System.Windows.Forms.CheckBox ClassmatesInsert;
     }
 }

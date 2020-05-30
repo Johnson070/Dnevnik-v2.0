@@ -19,13 +19,11 @@ namespace Dnevnik.DnevnikClasses
         public bool GetFileType(string path)
         {
             string json;
-            StructFile table = null;
-
             json = File.ReadAllText(path);
 
             try
             {
-                table = JsonConvert.DeserializeObject<StructFile>(json);
+                StructFile table = JsonConvert.DeserializeObject<StructFile>(json);
                 return table.typeGrid;
             }
             catch

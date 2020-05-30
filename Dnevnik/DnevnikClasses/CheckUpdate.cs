@@ -43,7 +43,7 @@ namespace Dnevnik.DnevnikClasses
             return "Ваша версиия программы " + Application.ProductVersion + ".\n\rВерсия загруженая на сервере " + version;
         }
 
-        void startDownload(String url, string saveFile)
+        void StartDownload(String url, string saveFile)
         {
             strip.Visible = true;
 
@@ -53,14 +53,14 @@ namespace Dnevnik.DnevnikClasses
 
             Uri uri = new Uri(url);
 
-            WebClient web = new WebClient();
-            web.DownloadProgressChanged += web_DownloadProgressChanged;
-            web.DownloadFileCompleted += web_DownloadFileCompleted;
-            web.DownloadProgressChanged += webClient_DownloadProgressChanged;
+            using WebClient web = new WebClient();
+            web.DownloadProgressChanged += Web_DownloadProgressChanged;
+            web.DownloadFileCompleted += Web_DownloadFileCompleted;
+            web.DownloadProgressChanged += WebClient_DownloadProgressChanged;
             web.DownloadFileAsync(uri, saveFile);
         }
 
-        void webClient_DownloadProgressChanged(object sender, System.Net.DownloadProgressChangedEventArgs e)
+        void WebClient_DownloadProgressChanged(object sender, System.Net.DownloadProgressChangedEventArgs e)
         {
             try
             {
@@ -72,7 +72,7 @@ namespace Dnevnik.DnevnikClasses
             }
         }
 
-        void web_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
+        void Web_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
         {
             bar.Value = 100;
             label.Text = "";
@@ -89,7 +89,7 @@ namespace Dnevnik.DnevnikClasses
             Application.Exit();
         }
 
-        void web_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
+        void Web_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
         {
             bar.Value = e.ProgressPercentage;
         }
@@ -121,7 +121,7 @@ namespace Dnevnik.DnevnikClasses
                 link = Client.DownloadString("https://raw.githubusercontent.com/Johnson070/Dnevnik-v2.0/master/download_link.txt");
             }
 
-            startDownload(link, Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Setup.exe"));
+            StartDownload(link, Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Setup.exe"));
 
             //startDownload(link, Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "SchoolMetric_v." + vers + ".exe"));
         }

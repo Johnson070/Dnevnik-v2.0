@@ -25,7 +25,7 @@ namespace Dnevnik
             averageBallTool.DropDownItems[1].Text = "5,0";
         }
 
-        private void sortData_Shown(object sender, EventArgs e)
+        private void SortData_Shown(object sender, EventArgs e)
         {
 
             int rowIndex = 0;
@@ -50,7 +50,7 @@ namespace Dnevnik
             }
         }
 
-        private void resetSort_Click(object sender, EventArgs e)
+        private void ResetSort_Click(object sender, EventArgs e)
         {
             int countRows = dataGridView1.Rows.Count;
 
@@ -60,10 +60,10 @@ namespace Dnevnik
                 dataGridView2.Rows.RemoveAt(0);
             }
 
-            sortData_Shown(null, null);
+            SortData_Shown(null, null);
         }
 
-        private void selectButton_Click(object sender, EventArgs e)
+        private void SelectButton_Click(object sender, EventArgs e)
         {
             Validate();
             dataGridView1.Update();

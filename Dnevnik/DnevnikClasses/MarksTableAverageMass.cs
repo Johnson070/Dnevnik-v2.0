@@ -504,42 +504,40 @@ namespace Dnevnik.DnevnikClasses
                             data.oldBall = 0.00f;
                         }
 
-                        using (MarksSelect selectForm = new MarksSelect(data)
+                        using MarksSelect selectForm = new MarksSelect(data)
                         {
                             Text = marks[0, marks.CurrentCell.RowIndex].Value.ToString()
-                        })
+                        };
+                        try
                         {
-                            try
+                            selectForm.ShowDialog();
+                        }
+                        catch
+                        {
+                            MessageBox.Show("Слишком большое кол-во оценок.\rПопробуйте изменить критерии поиска или изменить кол-во оценок.");
+                        }
+
+                        if (selectForm.selectedRow != null)
+                        {
+                            int countCol;
+
+                            if (((marks.ColumnCount - 2) / 2 - mark[marks.CurrentCell.RowIndex].Count - selectForm.selectedRow.Count <= 0))
                             {
-                                selectForm.ShowDialog();
+                                countCol = Math.Abs((marks.ColumnCount - 2) / 2 - mark[marks.CurrentCell.RowIndex].Count - selectForm.selectedRow.Count);
+
+                                ColumnGenBallWeight(countCol);
                             }
-                            catch
+
+                            int index = mark[marks.CurrentCell.RowIndex].Count * 2 + 1, indexMark = 0;
+
+                            for (int i = 0; i < selectForm.selectedRow.Count * 2; i++)
                             {
-                                MessageBox.Show("Слишком большое кол-во оценок.\rПопробуйте изменить критерии поиска или изменить кол-во оценок.");
-                            }
-
-                            if (selectForm.selectedRow != null)
-                            {
-                                int countCol;
-
-                                if (((marks.ColumnCount - 2) / 2 - mark[marks.CurrentCell.RowIndex].Count - selectForm.selectedRow.Count <= 0))
+                                if (i % 2 == 0)
+                                    marks[index + i, marks.CurrentCell.RowIndex].Value = selectForm.selectedRow[indexMark][0];
+                                else
                                 {
-                                    countCol = Math.Abs((marks.ColumnCount - 2) / 2 - mark[marks.CurrentCell.RowIndex].Count - selectForm.selectedRow.Count);
-
-                                    ColumnGenBallWeight(countCol);
-                                }
-
-                                int index = mark[marks.CurrentCell.RowIndex].Count * 2 + 1, indexMark = 0;
-
-                                for (int i = 0; i < selectForm.selectedRow.Count * 2; i++)
-                                {
-                                    if (i % 2 == 0)
-                                        marks[index + i, marks.CurrentCell.RowIndex].Value = selectForm.selectedRow[indexMark][0];
-                                    else
-                                    {
-                                        marks[index + i, marks.CurrentCell.RowIndex].Value = selectForm.selectedRow[indexMark][1];
-                                        indexMark++;
-                                    }
+                                    marks[index + i, marks.CurrentCell.RowIndex].Value = selectForm.selectedRow[indexMark][1];
+                                    indexMark++;
                                 }
                             }
                         }

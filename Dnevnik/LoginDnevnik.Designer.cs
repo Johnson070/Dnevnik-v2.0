@@ -79,7 +79,7 @@
             this.memberCred.TabIndex = 4;
             this.memberCred.Text = "Запомнить вход";
             this.memberCred.UseVisualStyleBackColor = true;
-            this.memberCred.CheckedChanged += new System.EventHandler(this.memberCred_CheckedChanged);
+            this.memberCred.CheckedChanged += new System.EventHandler(this.MemberCred_CheckedChanged);
             // 
             // login
             // 
@@ -89,7 +89,7 @@
             this.login.TabIndex = 5;
             this.login.Text = "Войти";
             this.login.UseVisualStyleBackColor = true;
-            this.login.Click += new System.EventHandler(this.login_Click);
+            this.login.Click += new System.EventHandler(this.Login_Click);
             // 
             // LoginDnevnik
             // 
