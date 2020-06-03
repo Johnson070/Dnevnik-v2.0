@@ -1,1 +1,1 @@
-Ссылки на скачивание обновления!
+https://github.com/Johnson070/Dnevnik-v2.0/releases/download/2.0.0.0/DnevnikSetup.msi
