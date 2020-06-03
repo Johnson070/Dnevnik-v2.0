@@ -16,22 +16,24 @@ namespace Dnevnik
 {
     public partial class SelectDataChildren : Form
     {
-        readonly List<List<int[]>> timeTable = new List<List<int[]>>()
-        {
-            new List<int[]>{ new int[] {9, 10, -1, 0}, new int[] { 11, 12, -1, 0}, new int[] {1,3,0,1 }, new int[] {4,5,0,1 } },
-            new List<int[]>{ new int[] {9, 11, -1, 0}, new int[] { 12, 2, -1, 1}, new int[] {3,5,0,1 } },
-            new List<int[]>{ new int[] {9, 12, -1, 0}, new int[] { 1, 5,0,1} }
-        };
+        //readonly List<List<int[]>> timeTable = new List<List<int[]>>()
+        //{
+        //    new List<int[]>{ new int[] {9, 10, -1, 0}, new int[] { 11, 12, -1, 0}, new int[] {1,3,0,1 }, new int[] {4,5,0,1 } },
+        //    new List<int[]>{ new int[] {9, 11, -1, 0}, new int[] { 12, 2, -1, 1}, new int[] {3,5,0,1 } },
+        //    new List<int[]>{ new int[] {9, 12, -1, 0}, new int[] { 1, 5,0,1} }
+        //};
 
         readonly List<string> selectPeriodList = new List<string>()
         {
-            { "Четверть"},
-            { "Триместр"},
-            { "Семестр" }
+            { "Другое"},
+            { "Семестр"},
+            { "Триместр" },
+            { "Четверть"  }
         };
 
         private bool updateDataBool = true;
         private bool updateSchoolmates = false;
+        private int incYearType = 0;
         public bool closeWindow = false;
         public int indexChild = -1;
         public int indexChildGroup = -1;
@@ -54,54 +56,109 @@ namespace Dnevnik
 
             int index = SelectPeriod.SelectedIndex;
 
-            if (TypeYearList.SelectedIndex >= 0 && TypeYearList.SelectedIndex <= 2)
+            if (TypeYearList.SelectedIndex >= 1 && TypeYearList.SelectedIndex <= 3)
             {
                 SelectPeriod.Enabled = true;
+                //SelectPeriod.Items.Clear();
+
+                //for (int i = 0; i < 4 - TypeYearList.SelectedIndex; i++)
+                //{
+                //    SelectPeriod.Items.Add($"{i + 1} {selectPeriodList[TypeYearList.SelectedIndex]}");
+                //}
+
+                //if (index == -1)
+                //    SelectPeriod.SelectedIndex = 0;
+                //else
+                //    SelectPeriod.SelectedIndex = index;
+
+                //int[] date = timeTable[TypeYearList.SelectedIndex][SelectPeriod.SelectedIndex];
+
+                //StartDate.Value = new DateTime((groups[Childrens.SelectedIndex][studyYear.SelectedIndex].year + date[3]), date[0], 1, 0, 0, 1);
+
+                //try
+                //{
+                //    if (date[1] != 2)
+                //    {
+                //        if (date[1] % 2 == 0)
+                //            EndDate.Value = new DateTime(groups[Childrens.SelectedIndex][studyYear.SelectedIndex].year + date[3], date[1], 31);
+                //        else
+                //            EndDate.Value = new DateTime(groups[Childrens.SelectedIndex][studyYear.SelectedIndex].year + date[3], date[1], 30);
+                //    }
+                //    else
+                //    {
+                //        EndDate.Value = new DateTime(groups[Childrens.SelectedIndex][studyYear.SelectedIndex].year - date[3], date[1], 28);
+                //    }
+                //}
+                //catch
+                //{
+                //    var dateTimeMax = DateTime.UtcNow;
+
+                //    EndDate.MaxDate = dateTimeMax;
+                //    EndDate.Value = dateTimeMax;
+                //}
+
+                UpdateTypeYear();
+
+                TypeYearList.SelectedIndex = groups[Childrens.SelectedIndex][studyYear.SelectedIndex].subGroups.Count- incYearType;
                 SelectPeriod.Items.Clear();
 
-                for (int i = 0; i < 4 - TypeYearList.SelectedIndex; i++)
-                {
-                    SelectPeriod.Items.Add($"{i + 1} {selectPeriodList[TypeYearList.SelectedIndex]}");
-                }
+                foreach (SubGroups subGroup in groups[Childrens.SelectedIndex][studyYear.SelectedIndex].subGroups)
+                    SelectPeriod.Items.Add(subGroup.name);
 
-                if (index == -1)
+                if (index is -1 || SelectPeriod.Items.Count - 1 < index)
                     SelectPeriod.SelectedIndex = 0;
                 else
                     SelectPeriod.SelectedIndex = index;
 
-                int[] date = timeTable[TypeYearList.SelectedIndex][SelectPeriod.SelectedIndex];
+                DateTime maxDate = groups[Childrens.SelectedIndex][studyYear.SelectedIndex].subGroups[SelectPeriod.SelectedIndex].endTime;
+                DateTime minDate = groups[Childrens.SelectedIndex][studyYear.SelectedIndex].subGroups[SelectPeriod.SelectedIndex].startDate;
 
-                StartDate.Value = new DateTime((groups[Childrens.SelectedIndex][studyYear.SelectedIndex].year + date[3]), date[0], 1, 0, 0, 1);
+                if (maxDate > DateTime.UtcNow)
+                    maxDate = DateTime.UtcNow;
 
                 try
                 {
-                    if (date[1] != 2)
-                    {
-                        if (date[1] % 2 == 0)
-                            EndDate.Value = new DateTime(groups[Childrens.SelectedIndex][studyYear.SelectedIndex].year + date[3], date[1], 31);
-                        else
-                            EndDate.Value = new DateTime(groups[Childrens.SelectedIndex][studyYear.SelectedIndex].year + date[3], date[1], 30);
-                    }
-                    else
-                    {
-                        EndDate.Value = new DateTime(groups[Childrens.SelectedIndex][studyYear.SelectedIndex].year - date[3], date[1], 28);
-                    }
+                    StartDate.MinDate = minDate;
+                    StartDate.MaxDate = maxDate;
+                    EndDate.MinDate = minDate;
+                    EndDate.MaxDate = maxDate;
                 }
                 catch
                 {
-                    var dateTimeMax = DateTime.UtcNow;
-
-                    EndDate.MaxDate = dateTimeMax;
-                    EndDate.Value = dateTimeMax;
+                    StartDate.MaxDate = maxDate;
+                    StartDate.MinDate = minDate;
+                    EndDate.MaxDate = maxDate;
+                    EndDate.MinDate = minDate;
                 }
+
+                StartDate.Value = minDate;
+                EndDate.Value = maxDate;
             }
             else
             {
+                StartDate.MinDate = new DateTime(2000, 01, 01);
+                StartDate.MaxDate = DateTime.UtcNow;
+                EndDate.MinDate = new DateTime(2000, 01, 01);
+                EndDate.MaxDate = DateTime.UtcNow;
                 SelectPeriod.Items.Clear();
                 SelectPeriod.Enabled = false;
             }
 
             updateDataBool = true;
+        }
+
+        private void UpdateTypeYear()
+        {
+            TypeYearList.Items.Clear();
+
+            for (int i = 0; i < selectPeriodList.Count; i++)
+                if (i == groups[Childrens.SelectedIndex][studyYear.SelectedIndex].subGroups.Count - 1)
+                {
+                    incYearType = i;
+                    TypeYearList.Items.Add(selectPeriodList[i]);
+                }
+                else if (i is 0)
+                    TypeYearList.Items.Add(selectPeriodList[i]);
         }
 
         private void SetChildrens(List<List<Persons>> persons, List<List<Persons>> members, List<List<Groups>> groups)
@@ -122,22 +179,23 @@ namespace Dnevnik
             this.persons = persons;
             this.groups = groups;
             this.members = members;
+
+            UpdateTypeYear();
+
             updateYear = true;
             updateSchoolmates = true;
         }
 
         private void SelectDataChildren_Shown(object sender, EventArgs e)
         {
-            TypeYearList.SelectedIndex = 0;
+            TypeYearList.SelectedIndex = 1;
             SelectList();
-
-            EndDate.MaxDate = DateTime.UtcNow;
         }
 
         private void TimetableList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (SelectPeriod.Enabled)
-                SelectPeriod.SelectedIndex = 0;
+            //if (SelectPeriod.Enabled)
+            //    SelectPeriod.SelectedIndex = 0;
 
             if (updateDataBool)
                 SelectList();
@@ -168,23 +226,6 @@ namespace Dnevnik
                     schoolmates.Items.Add(person.userName);
 
                 schoolmates.SelectedIndex = 0;
-
-                int year = groups[schoolmates.SelectedIndex][studyYear.SelectedIndex].year;
-
-                try
-                {
-                    StartDate.MinDate = new DateTime(year, 09, 01);
-                    StartDate.MaxDate = new DateTime(year + 1, 05, 31);
-                    EndDate.MinDate = new DateTime(year, 09, 01);
-                    EndDate.MaxDate = new DateTime(year + 1, 05, 31);
-                }
-                catch
-                {
-                    StartDate.MaxDate = new DateTime(year + 1, 05, 31);
-                    StartDate.MinDate = new DateTime(year, 09, 01);
-                    EndDate.MaxDate = new DateTime(year + 1, 05, 31);
-                    EndDate.MinDate = new DateTime(year, 09, 01);
-                }
 
                 //SelectPeriod.SelectedIndex = 0;
 

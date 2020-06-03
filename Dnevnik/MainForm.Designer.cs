@@ -86,6 +86,7 @@
             this.toolStripSeparator19 = new System.Windows.Forms.ToolStripSeparator();
             this.ClearCellMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator20 = new System.Windows.Forms.ToolStripSeparator();
+            this.FormatTableMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.ClearTableMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
@@ -104,7 +105,7 @@
             this.toolStripMenuItem11 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator14 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem12 = new System.Windows.Forms.ToolStripMenuItem();
-            this.FormatTableMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.Analytics = new System.Windows.Forms.ToolStripButton();
             this.Tools.SuspendLayout();
             this.Status.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -117,6 +118,7 @@
             this.Tools.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.operateFile,
             this.actionsDownList,
+            this.Analytics,
             this.mainList});
             this.Tools.Location = new System.Drawing.Point(0, 0);
             this.Tools.Name = "Tools";
@@ -455,7 +457,7 @@
             this.FormatTableMenu,
             this.ClearTableMenu});
             this.TableMenu.Name = "contextMenuStrip1";
-            this.TableMenu.Size = new System.Drawing.Size(210, 304);
+            this.TableMenu.Size = new System.Drawing.Size(210, 282);
             // 
             // GenMarksMenu
             // 
@@ -545,6 +547,13 @@
             // 
             this.toolStripSeparator20.Name = "toolStripSeparator20";
             this.toolStripSeparator20.Size = new System.Drawing.Size(206, 6);
+            // 
+            // FormatTableMenu
+            // 
+            this.FormatTableMenu.Name = "FormatTableMenu";
+            this.FormatTableMenu.Size = new System.Drawing.Size(209, 22);
+            this.FormatTableMenu.Text = "Форматировать таблицу";
+            this.FormatTableMenu.Click += new System.EventHandler(this.FormatTable_Click);
             // 
             // ClearTableMenu
             // 
@@ -649,12 +658,15 @@
             this.toolStripMenuItem12.Size = new System.Drawing.Size(228, 22);
             this.toolStripMenuItem12.Text = "Очистить таблицу";
             // 
-            // FormatTableMenu
+            // Analytics
             // 
-            this.FormatTableMenu.Name = "FormatTableMenu";
-            this.FormatTableMenu.Size = new System.Drawing.Size(209, 22);
-            this.FormatTableMenu.Text = "Форматировать таблицу";
-            this.FormatTableMenu.Click += new System.EventHandler(this.FormatTable_Click);
+            this.Analytics.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.Analytics.Image = ((System.Drawing.Image)(resources.GetObject("Analytics.Image")));
+            this.Analytics.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.Analytics.Name = "Analytics";
+            this.Analytics.Size = new System.Drawing.Size(113, 22);
+            this.Analytics.Text = "Аналитика оценок";
+            this.Analytics.Click += new System.EventHandler(this.Analytics_Click);
             // 
             // dnevnik
             // 
@@ -758,6 +770,7 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem12;
         private System.Windows.Forms.ToolStripMenuItem FormatTable;
         private System.Windows.Forms.ToolStripMenuItem FormatTableMenu;
+        private System.Windows.Forms.ToolStripButton Analytics;
     }
 }
 

@@ -12,11 +12,27 @@ namespace Dnevnik.DnevnikClasses
 {
     class DnevnikWork
     {
+        /// <summary>
+        /// Инициализация класса
+        /// </summary>
+        /// <param name="keyAccess">Токен</param>
         public DnevnikWork(string keyAccess) => api = new ApiDiary(keyAccess);
 
+        /// <summary>
+        /// Класс для работы с api
+        /// </summary>
         readonly ApiDiary api;
+
+        /// <summary>
+        /// Для для работы в отдельном потоке
+        /// </summary>
         ResultWorker work;
 
+        /// <summary>
+        /// Найти самое большое кол-во оценок в списке
+        /// </summary>
+        /// <param name="count"></param>
+        /// <returns></returns>
         private int MaxCountBalls(List<List<InputMark>> count)
         {
             int max = 2;
@@ -29,13 +45,32 @@ namespace Dnevnik.DnevnikClasses
             return max;
         }
 
+        /// <summary>
+        /// Класс для хранения оценки
+        /// </summary>
         class InputMark
         {
+            /// <summary>
+            /// Оценка
+            /// </summary>
             public int mark;
+
+            /// <summary>
+            /// Тип работы
+            /// </summary>
             public long typeWork;
+
+            /// <summary>
+            /// Название работы
+            /// </summary>
             public string nameWork;
         }
 
+
+        /// <summary>
+        /// Получить список детей у пользователя или самого пользователя
+        /// </summary>
+        /// <returns></returns>
         public List<List<Persons>> GetMembers()
         {
             List<List<Persons>> ids = new List<List<Persons>>() { new List<Persons>() };
@@ -88,6 +123,12 @@ namespace Dnevnik.DnevnikClasses
             return ids;
         }
 
+        /// <summary>
+        /// Получить список детей у пользователя или самого пользователя + можно получить еще список одноклассников
+        /// </summary>
+        /// <param name="groups">Список групп в которых находится пользователь</param>
+        /// <param name="getClassmates">Добавлять в список одноклассников</param>
+        /// <returns></returns>
         public List<List<Persons>> GetMembers(List<List<Groups>> groups, bool getClassmates = true)
         {
             List<List<Persons>> ids = new List<List<Persons>>();
@@ -161,11 +202,26 @@ namespace Dnevnik.DnevnikClasses
             return ids;
         }
 
+        /// <summary>
+        /// Класс для хранения уроков по предмету
+        /// </summary>
         class TempWork
         {
+            /// <summary>
+            /// Работы
+            /// </summary>
             public JArray work;
+
+            /// <summary>
+            /// id предмета
+            /// </summary>
             public long subject;
 
+            /// <summary>
+            /// Инициализация класса
+            /// </summary>
+            /// <param name="work">Работы</param>
+            /// <param name="subject">id предмета</param>
             public TempWork(JArray work, long subject)
             {
                 this.work = work;
@@ -173,15 +229,42 @@ namespace Dnevnik.DnevnikClasses
             }
         }
 
+        /// <summary>
+        /// Класс результата работы потока
+        /// </summary>
         class ResultWorker
         {
+            /// <summary>
+            /// Список оценок
+            /// </summary>
             public List<List<InputMark>> marks;
+
+            /// <summary>
+            /// Список названий предметов
+            /// </summary>
             public List<string> nameLesson;
+
+            /// <summary>
+            /// Класс с таблицей
+            /// </summary>
             public MarksTable table;
+
+            /// <summary>
+            /// Класс для сброса markstable и таблицы
+            /// </summary>
             public ResetClass rst;
+
+            /// <summary>
+            /// Список с типами работ
+            /// </summary>
             public JArray typeWork;
         }
 
+        /// <summary>
+        /// Получить все группы для списка пользователей
+        /// </summary>
+        /// <param name="persons">Список пользователей</param>
+        /// <returns></returns>
         public List<List<Groups>> GetAllGroups(List<List<Persons>> persons)
         {
             List<List<Groups>> groups = new List<List<Groups>>();
@@ -196,14 +279,25 @@ namespace Dnevnik.DnevnikClasses
                     foreach (JObject group in groupsJ)
                         if (group["type"].Value<string>() == "Group")
                         {
-                            groups[i].Add(new Groups() { id = group["id"].Value<long>(), name = group["name"].Value<string>(), year = group["studyyear"].Value<int>() });
+                            var dataGroups = (JArray)JsonConvert.DeserializeObject(api.GetGroupReports(group["id"].Value<long>()));
+
+                            List<SubGroups> subGroups = new List<SubGroups>();
+
+                            foreach (JObject dataGroup in dataGroups)
+                                subGroups.Add(new SubGroups() { type = dataGroup["type"].Value<string>(), name = dataGroup["name"].Value<string>(), startDate = dataGroup["start"].Value<DateTime>(), endTime = dataGroup["finish"].Value<DateTime>() });
+
+                            groups[i].Add(new Groups() { id = group["id"].Value<long>(), name = group["name"].Value<string>(), year = group["studyyear"].Value<int>(), subGroups = subGroups });
                         }
                 }
 
             return groups;
         }
 
-
+        /// <summary>
+        /// Пулучить список id уроков по информации об уроке
+        /// </summary>
+        /// <param name="lessons">Список уроков</param>
+        /// <returns></returns>
         private List<long[]> GetLessonId(JArray lessons)
         {
             List<long[]> lessonsIds = new List<long[]>();
@@ -237,9 +331,12 @@ namespace Dnevnik.DnevnikClasses
             return lessonsIds;
         }
 
+        /// <summary>
+        /// Получить оценки для пользователя
+        /// </summary>
+        /// <param name="children">Пользователь</param>
         public void GetMarksDiary(SelectChildren children)
         {
-            //var groupId = ((JArray)JsonConvert.DeserializeObject(api.GetPersonGroups(person.personId)))[0]["id"].Value<long>();
             var groupId = children.group.id;
 
             var schoolId = ((JArray)JsonConvert.DeserializeObject(api.GetSchool()))[0]["id"].Value<long>();
@@ -260,10 +357,6 @@ namespace Dnevnik.DnevnikClasses
 
             var lessonsIds = GetLessonId(((JArray)JsonConvert.DeserializeObject(api.GetGroupLessonsInfo(groupId, children.StartDate, children.EndDate))));
 
-            /*
-             * добавить парсинг значений lesson id из works!!!!!!
-             */
-
             for (int i = 0; i < lessons.Count; i++)
             {
                 marks.Add(new List<InputMark>());
@@ -280,22 +373,15 @@ namespace Dnevnik.DnevnikClasses
                         }
                     }
                 }
-
-                //var test = JsonConvert.DeserializeObject(api.GetGroupSubjectMarks(groupId, lessons[i]["id"].Value<long>(), children.StartDate, children.EndDate));
-
-                //foreach (JObject mark in test)
-                //{
-                //    var personId = mark["person"].Value<long>();
-
-                //    if (children.Member.personId == personId)
-                //        marks[i].Add(new InputMark { mark = mark["value"].Value<int>(), typeWork = mark["workType"].Value<long>() });
-                //}
             }
 
             work = new ResultWorker() { table = children.table, rst = children.Reset, marks = marks, nameLesson = nameLesson, typeWork = typeWork };
         }
 
-        public void InsertMarksInTable()
+        /// <summary>
+        /// Вставка оценок в таблицу
+        /// </summary>
+        public void InsertMarksInTable() // переписать метод в MarksTableAverage и MarksTableAverageMass
         {
             if (work.table is MarksTableAverageMass)
             {

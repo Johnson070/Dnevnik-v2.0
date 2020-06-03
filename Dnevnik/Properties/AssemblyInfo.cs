@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // набора атрибутов. Измените значения этих атрибутов для изменения сведений,
 // связанных со сборкой.
 [assembly: AssemblyTitle("Dnevnik")]
-[assembly: AssemblyDescription("Программа для анализа оценок!")]
+[assembly: AssemblyDescription("Программа для анализа,сортировки и хранения оценок!")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("vk.com/vveber070")]
 [assembly: AssemblyProduct("Dnevnik")]

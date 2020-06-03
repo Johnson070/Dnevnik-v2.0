@@ -14,7 +14,7 @@ namespace Dnevnik
     public partial class SortData : Form
     {
         public float[] averBall;
-        public List<int[]> indMarks;
+        public List<int[]> individualMarks;
         public int[] countMarks;
 
         public SortData()
@@ -73,7 +73,7 @@ namespace Dnevnik
             dataGridView2.EndEdit();
 
             averBall = new float[] { Convert.ToSingle(averageBallTool.DropDownItems[0].Text), Convert.ToSingle(averageBallTool.DropDownItems[1].Text) };
-            indMarks = new List<int[]>();
+            individualMarks = new List<int[]>();
             countMarks = new int[10];
 
             int rowIndex = 0;
@@ -81,13 +81,13 @@ namespace Dnevnik
             {
                 if (Properties.Settings.Default["nameLess" + i].ToString().Length != 0)
                 {
-                    indMarks.Add(new int[] { Convert.ToInt16(dataGridView2.Rows[rowIndex].Cells[2].Value), Convert.ToInt16(dataGridView2[3, rowIndex].Value) });
+                    individualMarks.Add(new int[] { Convert.ToInt16(dataGridView2.Rows[rowIndex].Cells[2].Value), Convert.ToInt16(dataGridView2[3, rowIndex].Value) });
                     countMarks[i-1] = Convert.ToInt16(dataGridView1[2, rowIndex].Value);
                     rowIndex++;
                 }
                 else
                 {
-                    indMarks.Add(new int[] { 2, 5 });
+                    individualMarks.Add(new int[] { 2, 5 });
                     countMarks[i-1] = 0;
                 }
             }

@@ -71,7 +71,7 @@ namespace Dnevnik
 
         private void CellFormating(object sender, DataGridViewCellEventArgs e)
         {
-            tables[TabMarks.SelectedIndex].CellFormating();
+            tables[TabMarks.SelectedIndex].TableFormating();
 
             tables[TabMarks.SelectedIndex].startEdit = true;
 
@@ -84,7 +84,7 @@ namespace Dnevnik
             {
                 try
                 {
-                    bool type = file.GetFileType(args[1]);
+                    bool type = file.GetTableType(args[1]);
 
                     AddTabFunc(type);
                 }
@@ -104,7 +104,7 @@ namespace Dnevnik
             {
                 if (args.Length > 1) file.OpenFile(tables[TabMarks.SelectedIndex].marks, args[1], tables[TabMarks.SelectedIndex].type);
 
-                tables[TabMarks.SelectedIndex].CellFormating();
+                tables[TabMarks.SelectedIndex].TableFormating();
                 tables[TabMarks.SelectedIndex].startEdit = false;
             }
             catch { }
@@ -171,14 +171,14 @@ namespace Dnevnik
             //table[tabControl1.SelectedIndex].CellFormating();
             file.OpenFile(tables[TabMarks.SelectedIndex].marks, tables[TabMarks.SelectedIndex].startEdit, tables[TabMarks.SelectedIndex].fileOpen, tables[TabMarks.SelectedIndex].type);
 
-            tables[TabMarks.SelectedIndex].CellFormating();
+            tables[TabMarks.SelectedIndex].TableFormating();
             tables[TabMarks.SelectedIndex].startEdit = false;
         }
 
         private void SaveFile_Click(object sender, EventArgs e)
         {
             if (tables[TabMarks.SelectedIndex] is MarksTableAverageMass) tables[TabMarks.SelectedIndex].CellClearNotValid();
-            tables[TabMarks.SelectedIndex].CellFormating();
+            tables[TabMarks.SelectedIndex].TableFormating();
             var state = file.SaveFile(tables[TabMarks.SelectedIndex].marks, tables[TabMarks.SelectedIndex].startEdit, tables[TabMarks.SelectedIndex].type, TabMarks.SelectedTab.Text.Replace(" *", string.Empty));
 
             if (!state)
@@ -203,7 +203,7 @@ namespace Dnevnik
                 }
         }
 
-        private void AddMarksFromDnevnik_Click(object sender, EventArgs e)
+        private LoginReturn CheckLoginInDnevnik()
         {
             string keyAccess = "";
             bool closedSuccess = false;
@@ -237,8 +237,17 @@ namespace Dnevnik
                 closedSuccess = loginForm.closedSuccess;
             }
 
+            return new LoginReturn() { closedSuccess = closedSuccess, keyAccess = keyAccess };
+        }
+
+        private void AddMarksFromDnevnik_Click(object sender, EventArgs e)
+        {
+            LoginReturn login = CheckLoginInDnevnik();
+            bool closedSuccess = login.closedSuccess;
+            string keyAccess = login.keyAccess;
+
             if (closedSuccess)
-                try
+                //try
                 {
                     DnevnikWork workDnevnik = new DnevnikWork((keyAccess == "" ? Properties.Settings.Default.keyAccess : keyAccess));
 
@@ -293,7 +302,7 @@ namespace Dnevnik
                         WorkBack.RunWorkerAsync();
                     }
                 }
-                catch (Exception ex) { MessageBox.Show("Непредвиденная ошибка!\nПопробуйте повторить попытку, поменять параметры или перезапустить программу!"); Clipboard.SetText(ex.Message); }
+                //catch (Exception ex) { MessageBox.Show("Непредвиденная ошибка!\nПопробуйте повторить попытку, поменять параметры или перезапустить программу!"); Clipboard.SetText(ex.Message); }
         }
 
         private void WorkBack_RunWorkerCompleted(DnevnikWork diary)
@@ -505,13 +514,13 @@ namespace Dnevnik
                 {
                     try
                     {
-                        bool type = file.GetFileType(filePath);
+                        bool type = file.GetTableType(filePath);
 
                         AddTabFunc(type, true);
 
                         file.OpenFile(tables[TabMarks.SelectedIndex].marks, filePath, tables[TabMarks.SelectedIndex].type);
 
-                        tables[TabMarks.SelectedIndex].CellFormating();
+                        tables[TabMarks.SelectedIndex].TableFormating();
                         tables[TabMarks.SelectedIndex].startEdit = false;
                     }
                     catch { }
@@ -526,7 +535,21 @@ namespace Dnevnik
 
         private void FormatTable_Click(object sender, EventArgs e)
         {
-            tables[TabMarks.SelectedIndex].CellFormating();
+            tables[TabMarks.SelectedIndex].CellClearNotValid();
+        }
+
+        private void Analytics_Click(object sender, EventArgs e)
+        {
+            LoginReturn login = CheckLoginInDnevnik();
+            bool closedSuccess = login.closedSuccess;
+            string keyAccess = login.keyAccess;
+
+            if (closedSuccess)
+            {
+                //Analytics analytics = new Analytics(new ApiDiary((keyAccess == "" ? Properties.Settings.Default.keyAccess : keyAccess)));
+
+                //analytics.test(1556261691152418797);
+            }
         }
     }
 }

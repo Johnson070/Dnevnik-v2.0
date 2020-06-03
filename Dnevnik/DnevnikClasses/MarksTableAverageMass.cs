@@ -9,13 +9,25 @@ using Dnevnik.DnevnikClasses;
 
 namespace Dnevnik.DnevnikClasses
 {
+    /// <summary>
+    /// Класс для работы с таблицей среднего взвешенного балла
+    /// </summary>
     class MarksTableAverageMass : MarksTable
     {
         // DataGridView marks { get; set; }
         //public List<string> nameLess { get; set; } = new List<string> { "Английский язык", "Астрономия", "Естествознание", "Информатика", "История", "Литература", "Математика", "ОБЖ", "Обществознание", "Программирование", "Русский язык", "Физика", "Физ-ра" };
+
+        /// <summary>
+        /// Оценки
+        /// </summary>
         public List<List<int[]>> mark { get; set; } = new List<List<int[]>>();
         
-        public override void DrawGrid(int columns, List<string> _name)
+        /// <summary>
+        /// Создать в таблице начальные столбцы и строки
+        /// </summary>
+        /// <param name="columns">Кол-во столбцов</param>
+        /// <param name="name">Список названий предметов</param>
+        public override void DrawGrid(int columns, List<string> name)
         {
             ColumnClass column = new ColumnClass();
 
@@ -37,14 +49,18 @@ namespace Dnevnik.DnevnikClasses
 
             /*=====================================*/
 
-            for (int i = 0; i < _name.Count; ++i)
+            for (int i = 0; i < name.Count; ++i)
             {
                 //Добавляем строку, указывая значения каждой ячейки по имени (можно использовать индекс 0, 1, 2 вместо имен)
                 marks.Rows.Add();
-                marks["name", marks.Rows.Count - 1].Value = _name[i];
+                marks["name", marks.Rows.Count - 1].Value = name[i];
             }
         }
 
+        /// <summary>
+        /// Создать в таблице определённое кол-во столбцов
+        /// </summary>
+        /// <param name="col">Кол-во столбцов</param>
         public override void ColumnGenBallWeight(int col = 1)
         {
             marks.AllowUserToAddRows = false;
@@ -64,6 +80,11 @@ namespace Dnevnik.DnevnikClasses
             marks.Columns.Add(column.ballSr[0]);
         }
 
+        /// <summary>
+        /// Копировать строку из таблицы
+        /// </summary>
+        /// <param name="row">строка</param>
+        /// <returns></returns>
         internal override DataGridViewRow CloneWithValues(DataGridViewRow row)
         {
             DataGridViewRow clonedRow = (DataGridViewRow)row.Clone();
@@ -74,6 +95,16 @@ namespace Dnevnik.DnevnikClasses
             return clonedRow;
         }
 
+        /// <summary>
+        /// Опускает или поднимает строку
+        /// </summary>
+        /// <param name="direct">
+        /// <list type="bullet">
+        /// <listheader>Направление строки:</listheader>
+        /// <item>false - вниз</item>
+        /// <item>true - вверх</item>
+        /// </list>
+        /// </param>
         public override void UpDownRow(bool direct) //direct == false down
         {
             if ((marks.CurrentCell.RowIndex != 0 && !direct) || (marks.CurrentCell.RowIndex != marks.Rows.Count && direct))
@@ -95,13 +126,17 @@ namespace Dnevnik.DnevnikClasses
             }
         }
 
-        public override void ResultBall(List<List<int[]>> _mark)
+        /// <summary>
+        /// Посчитать итоговый балл
+        /// </summary>
+        /// <param name="mark">Список оценок</param>
+        public override void ResultBall(List<List<int[]>> mark)
         {
-            for (int i = 0; i < _mark.Count; i++)
+            for (int i = 0; i < mark.Count; i++)
             {
                 int resultBall = 0, resultWeight = 0;
 
-                foreach (int[] oneMark in _mark[i])
+                foreach (int[] oneMark in mark[i])
                 {
                     resultBall += oneMark[0] * oneMark[1];
 
@@ -114,6 +149,9 @@ namespace Dnevnik.DnevnikClasses
             }
         }
 
+        /// <summary>
+        /// Внести оценки из таблицы в список
+        /// </summary>
         public override void InputMark()
         {
             mark.Clear();
@@ -129,6 +167,9 @@ namespace Dnevnik.DnevnikClasses
             }
         }
 
+        /// <summary>
+        /// Проверка таблицы на ошибки
+        /// </summary>
         public override void CheckCell()
         {
             for (int i = 0; i < marks.Rows.Count; i++)
@@ -166,6 +207,11 @@ namespace Dnevnik.DnevnikClasses
             }
         }
 
+        /// <summary>
+        /// Перевод набора чисел в одномерный числовой массив
+        /// </summary>
+        /// <param name="marksStr"></param>
+        /// <returns></returns>
         internal override int[] Str2intArr(string marksStr = "")
         {
             int[] poslBall;
@@ -183,65 +229,92 @@ namespace Dnevnik.DnevnikClasses
             return poslBall;
         }
 
-        internal override void ListMarksRecurse(List<List<int[]>> _marks, List<int[]> itogMarks, int[] len, int[] _mark = null, int listNum = 0)
+        /// <summary>
+        /// Собирает все возможные варианты перестановок оценок
+        /// </summary>
+        /// <param name="marks">Список оценок</param>
+        /// <param name="itogMarks">Готовый список оценок</param>
+        /// <param name="len">Длина последовательности</param>
+        /// <param name="mark">Генерируемая последовательность</param>
+        /// <param name="listNum">Длинна массива</param>
+        internal override void ListMarksRecurse(List<List<int[]>> marks, List<int[]> itogMarks, int[] len, int[] mark = null, int listNum = 0)
         {
-            for (int i = 0; i < _marks[listNum].Count; i++)
+            for (int i = 0; i < marks[listNum].Count; i++)
             {
-                if (listNum == _marks.Count - 1)
+                if (listNum == marks.Count - 1)
                 {
-                    if (_mark != null) itogMarks.Add(_mark.Concat(_marks[listNum][i]).ToArray());
-                    else itogMarks.Add(_marks[listNum][i]);
+                    if (mark != null) itogMarks.Add(mark.Concat(marks[listNum][i]).ToArray());
+                    else itogMarks.Add(marks[listNum][i]);
                 }
                 else
                 {
-                    if (_mark != null) _mark = _mark.Concat(_marks[listNum][i]).ToArray();
-                    else _mark = _marks[listNum][i];
-                    ListMarksRecurse(_marks, itogMarks, len, _mark, listNum + 1);
-                    Array.Resize(ref _mark, _mark.Length - len[listNum]);
+                    if (mark != null) mark = mark.Concat(marks[listNum][i]).ToArray();
+                    else mark = marks[listNum][i];
+                    ListMarksRecurse(marks, itogMarks, len, mark, listNum + 1);
+                    Array.Resize(ref mark, mark.Length - len[listNum]);
                 }
             }
         }
 
-        internal override void GenMarksRecurse(int lenght, List<int[]> _test, int start = 2, string marks = "")
+        /// <summary>
+        /// Генерация последовательности оценок без повторений
+        /// </summary>
+        /// <param name="lenght">Кол-во оценок</param>
+        /// <param name="marksList">Список оценок</param>
+        /// <param name="start">Стартовый индекс</param>
+        /// <param name="marks">Генерируемая последовательность оценок</param>
+        internal override void GenMarksRecurse(int lenght, List<int[]> marksList, int start = 2, string marks = "")
         {
             for (int i = start; i <= 5; i++)
             {
                 if (marks.Length == lenght)
                 {
-                    _test.Add(Str2intArr(marks));
+                    marksList.Add(Str2intArr(marks));
                     break;
                 }
-                else GenMarksRecurse(lenght, _test, i, marks + i.ToString());
+                else GenMarksRecurse(lenght, marksList, i, marks + i.ToString());
             }
         }
 
-        internal override int GetPosState(int[] _numBalls, int startPos = 0)
+        /// <summary>
+        /// Получает индекс в массиве, который не равен 0
+        /// </summary>
+        /// <param name="numBalls">Последовательность из кол-ва генерируемых оценок каждого типа</param>
+        /// <param name="startPos">Начальная позиция поиска в массиве</param>
+        /// <returns></returns>
+        internal override int GetPosState(int[] numBalls, int startPos = 0)
         {
-            for (int i = startPos; i < _numBalls.Length; i++)
+            for (int i = startPos; i < numBalls.Length; i++)
             {
-                if (_numBalls[i] != 0) return i;
+                if (numBalls[i] != 0) return i;
             }
 
             return 1;
         }
 
-        internal override void SortCriteriaRecurse(int[] _numBalls, SortMarkStructAverageMass sort, List<float> _averBall)
+        /// <summary>
+        /// Сортировка списка сгенерированных оценок
+        /// </summary>
+        /// <param name="numBalls">Последовательность из кол-ва генерируемых оценок каждого типа</param>
+        /// <param name="sort">Структура в который находятся критерии для сортировки</param>
+        /// <param name="averBall">Список со средними баллами</param>
+        internal override void SortCriteriaRecurse(int[] numBalls, SortMarkStructAverageMass sort, List<float> averBall)
         {
             for (int i = 0; i < sort.marks.Count; i++)
             {
                 int[] posWeight = new int[10];
 
-                _numBalls.CopyTo(posWeight, 0);
+                numBalls.CopyTo(posWeight, 0);
 
-                int pos = GetPosState(_numBalls);
+                int pos = GetPosState(numBalls);
 
                 for (int j = 0; j < sort.marks[i].Length; j++)
                 {
-                    if (!(sort.criteria[pos][0] <= sort.marks[i][j] && sort.criteria[pos][1] >= sort.marks[i][j]) || !(sort.averBall[0] <= _averBall[i] && sort.averBall[1] >= _averBall[i]))
+                    if (!(sort.criteria[pos][0] <= sort.marks[i][j] && sort.criteria[pos][1] >= sort.marks[i][j]) || !(sort.averBall[0] <= averBall[i] && sort.averBall[1] >= averBall[i]))
                     {
                         sort.marks.RemoveAt(i);
-                        _averBall.RemoveAt(i);
-                        SortCriteriaRecurse(_numBalls, sort, _averBall);
+                        averBall.RemoveAt(i);
+                        SortCriteriaRecurse(numBalls, sort, averBall);
                         return;
                     }
 
@@ -256,37 +329,53 @@ namespace Dnevnik.DnevnikClasses
         //    return _input;
         //}
 
-        public override int GetCountBalls(int[] _numBalls, bool mode = true)
+        /// <summary>
+        /// Считает сколько нужно сгенерировать оценок
+        /// </summary>
+        /// <param name="numBalls">Последовательность из кол-ва генерируемых оценок каждого типа</param>
+        /// <param name="mode">
+        /// <list type="bullet">
+        /// <listheader>Тип работы:</listheader>
+        /// <item>true - считает сколько типов работ</item>
+        /// <item>false - выдает кол-во оценок</item>
+        /// </list>
+        /// </param>
+        /// <returns></returns>
+        public override int GetCountBalls(int[] numBalls, bool mode = true)
         {
             int count = 0;
 
-            int[] numBalls = new int[10];
-            _numBalls.CopyTo(numBalls, 0);
+            int[] numBallsCopy = new int[10];
+            numBalls.CopyTo(numBallsCopy, 0);
 
             if (mode)
             {
-                for (int i = 0; i < _numBalls.Length; i++)
+                for (int i = 0; i < numBallsCopy.Length; i++)
                 {
-                    count += (_numBalls[i] > 0 ? 1 : 0);
+                    count += (numBallsCopy[i] > 0 ? 1 : 0);
                 }
             }
             else
             {
-                for (int i = 0; i < numBalls.Length; i++)
+                for (int i = 0; i < numBallsCopy.Length; i++)
                 {
-                    count += (numBalls[i] > 0 ? 1 : 0);
-                    numBalls[i] -= 1;
+                    count += (numBallsCopy[i] > 0 ? 1 : 0);
+                    numBallsCopy[i] -= 1;
 
-                    i -= (numBalls[i] > 0 ? 1 : 0);
+                    i -= (numBallsCopy[i] > 0 ? 1 : 0);
                 }
             }
 
             return count;
         }
 
+        /// <summary>
+        /// Возведение в факториал
+        /// </summary>
+        /// <param name="inFact">Рекурсия</param>
+        /// <returns></returns>
         internal override decimal FactFunc(decimal inFact)
         {
-
             if (inFact <= 1)
             {
                 return 1;
@@ -299,24 +388,37 @@ namespace Dnevnik.DnevnikClasses
             
         }
 
-        public override decimal CountMarksRow(int k, int[] numBalls)
+        /// <summary>
+        /// Считает кол-во генерируемых вариантов оценок
+        /// </summary>
+        /// <param name="countMarks">Кол-во оценок</param>
+        /// <param name="numBalls">Последовательность из кол-ва генерируемых оценок каждого типа</param>
+        /// <returns></returns>
+        public override decimal CountMarksRow(int countMarks, int[] numBalls)
         {
-            decimal count = (FactFunc(4 + k - 1)) / (FactFunc(k) * FactFunc(4 - 1));
+            decimal count = (FactFunc(4 + countMarks - 1)) / (FactFunc(countMarks) * FactFunc(4 - 1));
             return count * Convert.ToDecimal(GetCountBalls(numBalls));
         }
 
-        internal override List<float> SortMarks(SortMarkStructAverageMass sort, int[] _numBalls, List<int[]> _marksWeights)
+        /// <summary>
+        /// Расчет среднего взвешенного балла и сортировка по критериям
+        /// </summary>
+        /// <param name="sort">Критерии сортировки</param>
+        /// <param name="numBalls">Последовательность из кол-ва генерируемых оценок каждого типа</param>
+        /// <param name="marksWeights">Последовательность оценок, которая была внесена в таблицу</param>
+        /// <returns></returns>
+        internal override List<float> SortMarks(SortMarkStructAverageMass sort, int[] numBalls, List<int[]> marksWeights)
         {
             List<float> averBall = new List<float>();
 
             int preBall = 0, preWeight = 0;
 
-            if (_marksWeights != null)
+            if (marksWeights != null)
             {
-                for (int i = 0; i < _marksWeights.Count; i++)
+                for (int i = 0; i < marksWeights.Count; i++)
                 {
-                    preBall += _marksWeights[i][0] * _marksWeights[i][1];
-                    preWeight += _marksWeights[i][1];
+                    preBall += marksWeights[i][0] * marksWeights[i][1];
+                    preWeight += marksWeights[i][1];
                 }
             }
 
@@ -325,9 +427,9 @@ namespace Dnevnik.DnevnikClasses
                 int resultBall = 0, resultWeight = 0;
                 int[] posWeight = new int[10];
 
-                _numBalls.CopyTo(posWeight, 0);
+                numBalls.CopyTo(posWeight, 0);
 
-                int pos = GetPosState(_numBalls);
+                int pos = GetPosState(numBalls);
 
                 foreach (int oneMark in sort.marks[i])
                 {
@@ -343,12 +445,20 @@ namespace Dnevnik.DnevnikClasses
 
             }
 
-            SortCriteriaRecurse(_numBalls, sort, averBall);
+            SortCriteriaRecurse(numBalls, sort, averBall);
 
             return averBall;
         }
 
-        public override MarksDataAverageMass GenMarks(int[] numBalls, List<int[]> _criteria, float[] _averBall, List<int[]> _marksWeights)
+        /// <summary>
+        /// Генерирует последовательность оценок
+        /// </summary>
+        /// <param name="numBalls">Последовательность из кол-ва генерируемых оценок каждого типа</param>
+        /// <param name="criteria">Последовательность с параметрами индивидуальной сложности оценок</param>
+        /// <param name="_averBall">Последовательность с параметрами сортировки по среднему баллу</param>
+        /// <param name="marksWeights">Последовательность оценок, которая была внесена в таблицу</param>
+        /// <returns></returns>
+        public override MarksDataAverageMass GenMarks(int[] numBalls, List<int[]> criteria, float[] _averBall, List<int[]> marksWeights)
         {
             List<List<int[]>> ghostMarks = new List<List<int[]>>();
             List<int[]> itogMarks = new List<int[]>();
@@ -372,25 +482,14 @@ namespace Dnevnik.DnevnikClasses
             if (ghostMarks.Count != 1) ListMarksRecurse(ghostMarks, itogMarks, delPart.ToArray());
             else itogMarks = ghostMarks[0];
 
-            //columnGenBallWeight(20);
-
-            //for (int i = 0; i < itogMarks.Count; i++)
-            //{
-            //    for (int j = 0; j < itogMarks[i].Length; j++)
-            //        marks[j + 1, i].Value = itogMarks[i][j].ToString();
-
-            //    marks.Rows.Add();
-            //}
-            //MessageBox.Show(itogMarks.Count.ToString());
-
             SortMarkStructAverageMass sort = new SortMarkStructAverageMass
             {
-                criteria = _criteria,
+                criteria = criteria,
                 marks = itogMarks,
                 averBall = _averBall
             };
 
-            List<float> averBall = SortMarks(sort, numBalls, _marksWeights);
+            List<float> averBall = SortMarks(sort, numBalls, marksWeights);
 
             MarksDataAverageMass data = new MarksDataAverageMass
             {
@@ -400,8 +499,20 @@ namespace Dnevnik.DnevnikClasses
             };
 
             return data;
-        }   
+        }
 
+        /// <summary>
+        /// Разные действия с таблицей
+        /// </summary>
+        /// <param name="type">
+        /// <list type="bullet">
+        /// <listheader>Действие</listheader>
+        /// <item>1-добавить строку</item>
+        /// <item>2-удалить строку</item>
+        /// <item>3-добавить столбец</item>
+        /// <item>4-удалить столбец</item>
+        /// </list>
+        /// </param>
         public override void EditTable(int type) //1-addRow 2-deleteRow 3-addColumn 4-deleteColumn
         {
             switch (type)
@@ -434,7 +545,10 @@ namespace Dnevnik.DnevnikClasses
                     break;
             }
         }
-    
+
+        /// <summary>
+        /// Цветное выделение оценок
+        /// </summary>
         public override void ColorTableMarks()
         {
             for (int i = 0; i < marks.RowCount; i++)
@@ -471,6 +585,9 @@ namespace Dnevnik.DnevnikClasses
             }
         }
 
+        /// <summary>
+        /// Вызов окна для выбора критериев с последующей генерацией оценок, выбора, и вставки в таблицу
+        /// </summary>
         public override void GenMarksForm()
         {
             if (marks.CurrentCell != null)
@@ -493,7 +610,7 @@ namespace Dnevnik.DnevnikClasses
 
                     if (result == DialogResult.OK || DialogResult.Yes == result)
                     {
-                        data = GenMarks(frm.countMarks, frm.indMarks, frm.averBall, marksWeights);
+                        data = GenMarks(frm.countMarks, frm.individualMarks, frm.averBall, marksWeights);
 
                         try
                         {
@@ -546,7 +663,10 @@ namespace Dnevnik.DnevnikClasses
             }
         }
 
-        public override void CellFormating()
+        /// <summary>
+        /// Форматирование таблицы
+        /// </summary>
+        public override void TableFormating()
         {
             CheckCell();
             InputMark();
@@ -554,6 +674,9 @@ namespace Dnevnik.DnevnikClasses
             ColorTableMarks();
         }
 
+        /// <summary>
+        /// Удалить неправильно заполненные ячейки
+        /// </summary>
         public override void CellClearNotValid()
         {
             for (int i = 0; i < marks.Rows.Count; i++)

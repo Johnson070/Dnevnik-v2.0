@@ -104,5 +104,10 @@ namespace Dnevnik
         {
             settingsSave = false;
         }
+
+        private void ClassmatesInsert_CheckedChanged(object sender, EventArgs e)
+        {
+            settingsSave = false;
+        }
     }
 }

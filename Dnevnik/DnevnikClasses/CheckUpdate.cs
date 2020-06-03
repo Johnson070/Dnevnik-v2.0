@@ -16,6 +16,7 @@ namespace Dnevnik.DnevnikClasses
         private StatusStrip strip;
         private ToolStripProgressBar bar;
         private ToolStripLabel label;
+        private string nameFile;
 
         public string GetVersion()
         {
@@ -73,7 +74,7 @@ namespace Dnevnik.DnevnikClasses
         }
 
         void Web_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
-        {
+        { 
             bar.Value = 100;
             label.Text = "";
             label.Text = "";
@@ -81,7 +82,7 @@ namespace Dnevnik.DnevnikClasses
 
             MessageBox.Show("Загрузка обновления завершена!\n\nПрограмма будет закрыта и будет запущен установщик обновления.", "Обновление", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            Process.Start(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Setup.exe"));
+            Process.Start(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), nameFile));
 
             Properties.Settings.Default.change_log = true;
             Properties.Settings.Default.Save();
@@ -118,10 +119,12 @@ namespace Dnevnik.DnevnikClasses
             using (WebClient Client = new WebClient())
             {
                 Client.Encoding = Encoding.UTF8;
-                link = Client.DownloadString("https://raw.githubusercontent.com/Johnson070/Dnevnik-v2.0/master/download_link.txt");
+                link = Client.DownloadString("https://raw.githubusercontent.com/Johnson070/Dnevnik-v2.0/master/download_link.txt").Replace("\n", string.Empty);
             }
 
-            StartDownload(link, Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Setup.exe"));
+            nameFile = link.Substring(link.LastIndexOf("/") + 1, link.Length - link.LastIndexOf("/") - 1);
+
+            StartDownload(link, Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), nameFile));
 
             //startDownload(link, Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "SchoolMetric_v." + vers + ".exe"));
         }

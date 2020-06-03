@@ -434,6 +434,7 @@
             this.ClassmatesInsert.TabIndex = 17;
             this.ClassmatesInsert.Text = "Вставка оценок одноклассников";
             this.ClassmatesInsert.UseVisualStyleBackColor = true;
+            this.ClassmatesInsert.CheckedChanged += new System.EventHandler(this.ClassmatesInsert_CheckedChanged);
             // 
             // SettingsForm
             // 

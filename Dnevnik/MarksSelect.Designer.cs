@@ -58,7 +58,7 @@
             this.selectMarksButton.Name = "selectMarksButton";
             this.selectMarksButton.Size = new System.Drawing.Size(58, 22);
             this.selectMarksButton.Text = "Выбрать";
-            this.selectMarksButton.Click += new System.EventHandler(this.selectMarksButton_Click);
+            this.selectMarksButton.Click += new System.EventHandler(this.SelectMarksButton_Click);
             // 
             // sortTool
             // 
@@ -78,14 +78,14 @@
             this.upSort.Name = "upSort";
             this.upSort.Size = new System.Drawing.Size(165, 22);
             this.upSort.Text = "По возрастанию";
-            this.upSort.Click += new System.EventHandler(this.upSort_Click);
+            this.upSort.Click += new System.EventHandler(this.UpSort_Click);
             // 
             // downSort
             // 
             this.downSort.Name = "downSort";
             this.downSort.Size = new System.Drawing.Size(165, 22);
             this.downSort.Text = "По убыванию";
-            this.downSort.Click += new System.EventHandler(this.downSort_Click);
+            this.downSort.Click += new System.EventHandler(this.DownSort_Click);
             // 
             // selectMarksTable
             // 
@@ -109,7 +109,7 @@
             this.Name = "MarksSelect";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "marksSelect";
-            this.Shown += new System.EventHandler(this.marksSelect_Shown);
+            this.Shown += new System.EventHandler(this.MarksSelect_Shown);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.selectMarksTable)).EndInit();

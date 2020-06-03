@@ -38,6 +38,8 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <LangVersion>8.0</LangVersion>
+    <DocumentationFile>
+    </DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -83,11 +85,13 @@
     <Compile Include="AboutDnevnik.Designer.cs">
       <DependentUpon>AboutDnevnik.cs</DependentUpon>
     </Compile>
+    <Compile Include="DnevnikClasses\Analytics.cs" />
     <Compile Include="DnevnikClasses\CheckUpdate.cs" />
     <Compile Include="DnevnikClasses\ColumnClass.cs" />
     <Compile Include="DnevnikClasses\DnevnikWork.cs" />
     <Compile Include="DnevnikClasses\FileManager.cs" />
     <Compile Include="DnevnikClasses\Groups.cs" />
+    <Compile Include="DnevnikClasses\LoginReturn.cs" />
     <Compile Include="DnevnikClasses\MarksDataAverageMass.cs" />
     <Compile Include="DnevnikClasses\MarksDataAverage.cs" />
     <Compile Include="DnevnikClasses\MarksTable.cs" />

@@ -13,37 +13,37 @@ namespace Dnevnik
 {
     public partial class MarksSelect : Form
     {
-        List<int[]> marks;
-        List<float> averBall;
-        float oldBall;
-        int[] countBalls;
-        int countBallsSr;
+        readonly List<int[]> marks;
+        readonly List<float> averBall;
+        readonly float oldBall;
+        readonly int[] countBalls;
+        readonly int countBallsSr;
         public List<int[]> selectedRow;
 
-        bool type = false;
+        readonly bool type = false;
 
-        public MarksSelect(MarksDataAverageMass _data, MarksDataAverage _dataSr = null)
+        public MarksSelect(MarksDataAverageMass data, MarksDataAverage dataSr = null)
         {
             InitializeComponent();
 
-            if (_dataSr == null)
+            if (dataSr == null)
             {
-                marks = _data.marks;
-                averBall = _data.averBall;
-                countBalls = _data.countBalls;
-                oldBall = _data.oldBall;
+                marks = data.marks;
+                averBall = data.averBall;
+                countBalls = data.countBalls;
+                oldBall = data.oldBall;
             }
             else
             {
-                marks = _dataSr.marks;
-                averBall = _dataSr.averBall;
-                countBallsSr = _dataSr.countBalls;
-                oldBall = _dataSr.oldBall;
-                type = _dataSr.type;
+                marks = dataSr.marks;
+                averBall = dataSr.averBall;
+                countBallsSr = dataSr.countBalls;
+                oldBall = dataSr.oldBall;
+                type = dataSr.type;
             }
         }
 
-        private void columnsGen(int colNewBalls)
+        private void ColumnsGen(int colNewBalls)
         {
             selectMarksTable.Rows.Clear();
             selectMarksTable.Columns.Clear();
@@ -71,7 +71,7 @@ namespace Dnevnik
             selectMarksTable.Columns.Add(column.ballSr[3]);
         }
 
-        private int getPosState(int[] _numBalls, int startPos = 0)
+        private int GetPosState(int[] _numBalls, int startPos = 0)
         {
             for (int i = startPos; i < _numBalls.Length; i++)
             {
@@ -81,7 +81,7 @@ namespace Dnevnik
             return 1;
         }
 
-        private Color getColorBall(float ball, bool type = true)
+        private Color GetColorBall(float ball, bool type = true)
         {
             if (type)
             {
@@ -97,9 +97,9 @@ namespace Dnevnik
             }
         }
 
-        private void marksSelect_Shown(object sender, EventArgs e)
+        private void MarksSelect_Shown(object sender, EventArgs e)
         {
-            columnsGen(marks[0].Length);
+            ColumnsGen(marks[0].Length);
 
             for (int i = 0; i < marks.Count; i++)
             {
@@ -111,7 +111,7 @@ namespace Dnevnik
                 {
                     countBalls.CopyTo(posWeight, 0);
 
-                    pos = getPosState(countBalls);
+                    pos = GetPosState(countBalls);
                 }
 
                 selectMarksTable.Rows.Add();
@@ -119,12 +119,12 @@ namespace Dnevnik
                 int indexMark = 0;
 
                 selectMarksTable[selectMarksTable.ColumnCount - 1, selectMarksTable.RowCount - 1].Value = Math.Round(averBall[i] - oldBall, 2);
-                selectMarksTable[selectMarksTable.ColumnCount - 1, selectMarksTable.RowCount - 1].Style.BackColor = getColorBall(averBall[i] - oldBall, false);
+                selectMarksTable[selectMarksTable.ColumnCount - 1, selectMarksTable.RowCount - 1].Style.BackColor = GetColorBall(averBall[i] - oldBall, false);
 
                 selectMarksTable[selectMarksTable.ColumnCount - 2, selectMarksTable.RowCount - 1].Value = oldBall;
 
                 selectMarksTable[selectMarksTable.ColumnCount - 3, selectMarksTable.RowCount - 1].Value = averBall[i];
-                selectMarksTable[selectMarksTable.ColumnCount - 3, selectMarksTable.RowCount - 1].Style.BackColor = getColorBall(averBall[i]);
+                selectMarksTable[selectMarksTable.ColumnCount - 3, selectMarksTable.RowCount - 1].Style.BackColor = GetColorBall(averBall[i]);
 
                 if (!type)
                 {
@@ -138,7 +138,7 @@ namespace Dnevnik
                         if (j % 2 != 0)
                         {
                             posWeight[pos] -= 1;
-                            pos = (posWeight[pos] != 0 ? pos : getPosState(posWeight, pos));
+                            pos = (posWeight[pos] != 0 ? pos : GetPosState(posWeight, pos));
                         }
                     }
                 }
@@ -153,17 +153,17 @@ namespace Dnevnik
             }
         }
 
-        private void upSort_Click(object sender, EventArgs e)
+        private void UpSort_Click(object sender, EventArgs e)
         {
             selectMarksTable.Sort(selectMarksTable.Columns[selectMarksTable.ColumnCount - 3], ListSortDirection.Ascending);
         }
 
-        private void downSort_Click(object sender, EventArgs e)
+        private void DownSort_Click(object sender, EventArgs e)
         {
             selectMarksTable.Sort(selectMarksTable.Columns[selectMarksTable.ColumnCount - 3], ListSortDirection.Descending);
         }
 
-        private void selectMarksButton_Click(object sender, EventArgs e)
+        private void SelectMarksButton_Click(object sender, EventArgs e)
         {
             selectedRow = new List<int[]>();
 

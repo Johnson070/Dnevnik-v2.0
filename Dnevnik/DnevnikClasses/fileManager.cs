@@ -9,14 +9,17 @@ using System.Windows.Forms;
 
 namespace Dnevnik.DnevnikClasses
 {
+    /// <summary>
+    /// Класс для работы с файлами
+    /// </summary>
     public class FileManager
     {
-        //bool startEdit = false;
-        //bool fileOpen = false;
-
-        //private string directory = "";
-
-        public bool GetFileType(string path)
+        /// <summary>
+        /// Получить тип таблицы из файла 
+        /// </summary>
+        /// <param name="path">Путь к файлу</param>
+        /// <returns></returns>
+        public bool GetTableType(string path)
         {
             string json;
             json = File.ReadAllText(path);
@@ -32,6 +35,18 @@ namespace Dnevnik.DnevnikClasses
             }
         }
 
+        /// <summary>
+        /// Открыть файл и добавить его в таблицу
+        /// </summary>
+        /// <param name="grid">Таблица</param>
+        /// <param name="path">Путь к файлу</param>
+        /// <param name="type">
+        /// <list type="table">
+        /// <listheader>Тип таблицы:</listheader>
+        /// <item>false - средний взвешенный балл</item>
+        /// <item>true - средний балл</item>
+        /// </list>
+        /// </param>
         public void OpenFile(DataGridView grid, string path, bool type)
         {
             string json;
@@ -100,6 +115,19 @@ namespace Dnevnik.DnevnikClasses
             }
         }
 
+        /// <summary>
+        /// Открыть файл и добавить его в таблицу
+        /// </summary>
+        /// <param name="grid">Таблица</param>
+        /// <param name="startEdit">Начат редактироваться таблица</param>
+        /// <param name="fileOpen">Открыт файл</param>
+        /// <param name="type">
+        /// <list type="table">
+        /// <listheader>Тип таблицы:</listheader>
+        /// <item>false - средний взвешенный балл</item>
+        /// <item>true - средний балл</item>
+        /// </list>
+        /// </param>
         public void OpenFile(DataGridView grid, bool startEdit, bool fileOpen, bool type)
         {
             if (startEdit)
@@ -189,6 +217,19 @@ namespace Dnevnik.DnevnikClasses
             }
         }
 
+        /// <summary>
+        /// Сохранить таблицу в файл 
+        /// </summary>
+        /// <param name="grid">Таблица</param>
+        /// <param name="startEdit">Начат редактироваться таблица</param>
+        /// <param name="fileName">Имя файла</param>
+        /// <param name="type">
+        /// <list type="table">
+        /// <listheader>Тип таблицы:</listheader>
+        /// <item>false - средний взвешенный балл</item>
+        /// <item>true - средний балл</item>
+        /// </list>
+        /// </param>
         public bool SaveFile(DataGridView grid, bool startEdit, bool type, string fileName)
         {
             bool returnBool = true;
@@ -256,11 +297,33 @@ namespace Dnevnik.DnevnikClasses
             return returnBool;
         }
 
+        /// <summary>
+        /// Класс для сериализации и десериализации в файл или из файла
+        /// </summary>
         private class StructFile
         {
+            /// <summary>
+            /// Оценки
+            /// </summary>
             public List<List<string>> marks = new List<List<string>>();
+
+            /// <summary>
+            /// Названия предметов
+            /// </summary>
             public List<string> nameLess = new List<string>();
+
+            /// <summary>
+            /// <list type="table">
+            /// <listheader>Тип таблицы:</listheader>
+            /// <item>false - средний взвешенный балл</item>
+            /// <item>true - средний балл</item>
+            /// </list>
+            /// </summary>
             public bool typeGrid;
+
+            /// <summary>
+            /// Кол-во столбцов
+            /// </summary>
             public int columnCount;
         }
     }

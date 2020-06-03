@@ -148,11 +148,6 @@
             this.SelectPeriod.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.SelectPeriod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.SelectPeriod.FormattingEnabled = true;
-            this.SelectPeriod.Items.AddRange(new object[] {
-            "Четверть",
-            "Триместр",
-            "Семестр",
-            "Другое"});
             this.SelectPeriod.Location = new System.Drawing.Point(107, 46);
             this.SelectPeriod.Name = "SelectPeriod";
             this.SelectPeriod.Size = new System.Drawing.Size(89, 21);
@@ -164,11 +159,6 @@
             this.TypeYearList.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.TypeYearList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.TypeYearList.FormattingEnabled = true;
-            this.TypeYearList.Items.AddRange(new object[] {
-            "Четверть",
-            "Триместр",
-            "Семестр",
-            "Другое"});
             this.TypeYearList.Location = new System.Drawing.Point(6, 46);
             this.TypeYearList.Name = "TypeYearList";
             this.TypeYearList.Size = new System.Drawing.Size(95, 21);

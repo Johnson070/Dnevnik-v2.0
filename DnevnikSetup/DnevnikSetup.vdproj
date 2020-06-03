@@ -52,13 +52,13 @@
         "Entry"
         {
         "MsmKey" = "8:_76ED8D4BD73B2E495F4120376CC49C35"
-        "OwnerKey" = "8:_4986C710B1FD8BC523EA7009B1D46C48"
+        "OwnerKey" = "8:_65ACFB40079D4460BC3F4324654F82FA"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_76ED8D4BD73B2E495F4120376CC49C35"
-        "OwnerKey" = "8:_65ACFB40079D4460BC3F4324654F82FA"
+        "OwnerKey" = "8:_4986C710B1FD8BC523EA7009B1D46C48"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -76,17 +76,17 @@
         "Entry"
         {
         "MsmKey" = "8:_E3C457E1C918BE8EBBD5F9DFD4878AF6"
-        "OwnerKey" = "8:_65ACFB40079D4460BC3F4324654F82FA"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_E3C457E1C918BE8EBBD5F9DFD4878AF6"
         "OwnerKey" = "8:_4986C710B1FD8BC523EA7009B1D46C48"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
+        "MsmKey" = "8:_E3C457E1C918BE8EBBD5F9DFD4878AF6"
+        "OwnerKey" = "8:_65ACFB40079D4460BC3F4324654F82FA"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_65ACFB40079D4460BC3F4324654F82FA"
         "MsmSig" = "8:_UNDEFINED"
@@ -94,25 +94,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_28FF1278F42EA7C914A53BCDC54AE2D8"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_E3C457E1C918BE8EBBD5F9DFD4878AF6"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_76ED8D4BD73B2E495F4120376CC49C35"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_391228140F094D449921F344644FFC75"
+        "OwnerKey" = "8:_4986C710B1FD8BC523EA7009B1D46C48"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -124,7 +106,25 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_4986C710B1FD8BC523EA7009B1D46C48"
+        "OwnerKey" = "8:_391228140F094D449921F344644FFC75"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_76ED8D4BD73B2E495F4120376CC49C35"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_E3C457E1C918BE8EBBD5F9DFD4878AF6"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_28FF1278F42EA7C914A53BCDC54AE2D8"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -229,6 +229,11 @@
             "AssemblyAsmDisplayName" = "8:System.Net.Http, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 "ScatterAssemblies"
                 {
+                    "_1F3941287EDAEB39AAFD29E23D67337B"
+                    {
+                    "Name" = "8:System.Net.Http.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:System.Net.Http.dll"
             "TargetName" = "8:"
@@ -255,6 +260,11 @@
             "AssemblyAsmDisplayName" = "8:System.Net.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 "ScatterAssemblies"
                 {
+                    "_28FF1278F42EA7C914A53BCDC54AE2D8"
+                    {
+                    "Name" = "8:System.Net.Http.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:System.Net.Http.dll"
             "TargetName" = "8:"
@@ -281,6 +291,11 @@
             "AssemblyAsmDisplayName" = "8:ApiDiaryLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=25d216938d49f46d, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
+                    "_4986C710B1FD8BC523EA7009B1D46C48"
+                    {
+                    "Name" = "8:ApiDiaryLibrary.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:ApiDiaryLibrary.dll"
             "TargetName" = "8:"
@@ -307,6 +322,11 @@
             "AssemblyAsmDisplayName" = "8:RestSharp, Version=106.11.3.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
+                    "_76ED8D4BD73B2E495F4120376CC49C35"
+                    {
+                    "Name" = "8:RestSharp.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:RestSharp.dll"
             "TargetName" = "8:"
@@ -353,6 +373,11 @@
             "AssemblyAsmDisplayName" = "8:Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
+                    "_E3C457E1C918BE8EBBD5F9DFD4878AF6"
+                    {
+                    "Name" = "8:Newtonsoft.Json.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:Newtonsoft.Json.dll"
             "TargetName" = "8:"
@@ -462,13 +487,13 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Дневник"
-        "ProductCode" = "8:{DC9B7FC0-5EA7-492C-A088-857153378DDF}"
-        "PackageCode" = "8:{FF0484D5-E443-44A9-A8E5-DEF5B41A9A43}"
-        "UpgradeCode" = "8:{D4D764BB-B390-4608-B26D-D6C6939AA3EF}"
+        "ProductCode" = "8:{276A2162-4496-42B5-BDFD-8D1576C570EF}"
+        "PackageCode" = "8:{E48B3876-D945-47BF-B989-0D7966D899AC}"
+        "UpgradeCode" = "8:{D14843EE-9D32-4D51-9CD8-91A92A5A4620}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
-        "DetectNewerInstalledVersion" = "11:TRUE"
+        "DetectNewerInstalledVersion" = "11:FALSE"
         "InstallAllUsers" = "11:TRUE"
         "ProductVersion" = "8:2.0.0"
         "Manufacturer" = "8:iWeber"
@@ -1012,7 +1037,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_391228140F094D449921F344644FFC75"
             {
-            "SourcePath" = "8:..\\..\\WebBrowserParser\\ApiDiaryLibrary\\obj\\Debug\\ApiDiaryLibrary.dll"
+            "SourcePath" = "8:..\\..\\WebBrowserParser\\ApiDiaryLibrary\\obj\\Release\\ApiDiaryLibrary.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_0AF3AF99DB874DB1BD1B12FE5817A334"
@@ -1040,7 +1065,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_65ACFB40079D4460BC3F4324654F82FA"
             {
-            "SourcePath" = "8:..\\Dnevnik\\obj\\Debug\\Dnevnik.exe"
+            "SourcePath" = "8:..\\Dnevnik\\obj\\Release\\Dnevnik.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_0AF3AF99DB874DB1BD1B12FE5817A334"
